@@ -15,7 +15,7 @@ __license__ = 'MIT'
 
 import json, socket, os, sys
 import drawlight, setlights
-from bottle import Bottle, run, static_file, post, request, error
+from bottle import Bottle, run, static_file, post, request, error, abort
 
 # On the command line we can tell iotas to go into real mode possibly
 # invoke as python iotas.py nosim to avoid simulation mode -- which holideck won't
@@ -55,7 +55,12 @@ default_name = 'index.html'
 # Let's do the basic page loadery here
 @app.error(404)
 def redirect_404(error):
-	return server_root()
+    ua = request.headers.get('User-Agent')
+    if ua.find('CaptiveNetworkSupport') != -1:
+        print 'This is a WiFi login probe'
+	return 'Not a Wifi login, sorry'
+    else:
+        return server_root()
 
 @app.route('/')
 def server_root():
