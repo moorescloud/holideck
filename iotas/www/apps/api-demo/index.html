@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Holiday &raquo; API Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link rel="apple-touch-icon" href="../../apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-startup-image" href="../../apple-touch-splash.png">
+	
+	<link rel="stylesheet" href="../../css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="../../css/holiday-app.css" />
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700' rel='stylesheet'>
+	
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/jquery.mobile-1.3.1.js"></script>
+	<script src="../../js/holiday.js"></script>
+
+</head>
+
+<body>
+	
+	<div data-role="page" id="api-demo">
+	
+		<script src="api-demo.js"></script>
+	
+		<script>
+			
+			// Start the App
+			function start_app() {
+				console.log("start_app")
+				theApp = new apidemo(); // Instance an App
+				theApp.appStart(); // Start the App
+			}
+			
+			// Stop the App
+			function stop_app() {
+				console.log("stop_app");
+				theApp.appQuit();
+				$( document ).undelegate("#api-demo", "pageinit", start_app);
+				$( document ).undelegate("#api-demo", "pagebeforehide", stop_app );
+			}
+	
+			console.log("Location #api-demo");
+			
+			$( document ).delegate("#api-demo", "pageinit", start_app);
+			$( document ).delegate("#api-demo", "pagebeforehide", stop_app);
+	
+		</script>
+
+		
+		<header data-role="header" data-position="fixed">
+			
+			<a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
+			
+			<h1>API Demo</h1>
+			
+		</header>
+		
+		<section data-role="content">
+			
+			<img src="api-demo.png" alt=""/>
+			
+			<p>This demo shows how HTML5 &amp; Javascript can be used to individually control every light on the Holiday.</p>
+			
+			<div class="switch">
+				
+				<form>
+			    <label for="flip" class="ui-hidden-accessible">API Demo Start Stop</label>
+			    <select name="flip" id="flip" data-role="slider">
+		        <option value="stop">Start</option>
+		        <option value="start">Stop</option>
+			    </select>
+				</form>
+				
+			</div>
+			
+		</section>
+		
+	</div>
+	<!-- /api-demo -->
+		
+</body>
+</html>

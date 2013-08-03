@@ -1,0 +1,20 @@
+{ "lights": [
+{ "light": "all", "color": "white" },
+{ "light": "outerTop", "color": "green" },
+{ "light": "outerTop", "part": "frontRow", "color": "red" },
+{ "light": "outerLeft", "color": "blue" },
+{ "light": "outerLeft", "part": "leftCol", "color": "#808080" },
+{ "light": "outerBottom", "color": "magenta" },
+{ "light": "outerBottom", "part": "centerRow", "color": "orange" },
+{ "light": "outerRight", "color": "orange" },
+{ "light": "outerRight", "part": "rightCol", "color": "yellow" },
+{ "light": "innerTop", "color": "green" },
+{ "light": "innerTop", "part": "frontRow", "color": "red" },
+{ "light": "innerRight", "color": "cyan" },
+{ "light": "innerRight", "part": "rearRow", "color": "orange" },
+{ "light": "innerBottom", "color": "blue" },
+{ "light": "innerBottom", "part": "leftCol", "color": "black" },
+{ "light": "innerLeft", "color": "magenta" },
+{ "light": "innerLeft", "part": "rightCol", "color": "white" }
+]
+}

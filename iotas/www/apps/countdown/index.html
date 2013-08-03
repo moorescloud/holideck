@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Holiday &raquo; Countdown</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <link rel="apple-touch-icon" href="../../apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-startup-image" href="../../apple-touch-splash.png">
+    
+    <link rel="stylesheet" href="../../css/jquery.mobile-1.3.1.css" />
+    <link rel="stylesheet" href="../../css/holiday-app.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700' rel='stylesheet'>
+    
+    <script src="../../js/jquery-1.9.1.min.js"></script>
+    <script src="../../js/jquery.mobile-1.3.1.js"></script>
+    <script src="../../js/holiday.js"></script>
+
+<style>
+.button {
+    background: #262C32;
+    font-size: 32px;
+    width: 100px;
+    padding: 9px;
+    letter-spacing: 1px;
+    border: none;
+    color: #EFDDA8;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+</style>
+</head>
+
+<body>
+    
+    <div data-role="page" id="countdown">
+    
+        <script src="countdown.js"></script>
+    
+        <script>
+            
+            console.log("countdown");
+
+            // Start the App
+            function start_app() {
+                theApp = new countdown(); // Instance an App
+                theApp.appStart(); // Start the App up
+            }
+            
+            // Stop the App
+            function stop_app() {
+                theApp.appQuit(); // Quit the App
+                $( document ).undelegate("#countdown", "pageinit", start_app);
+                $( document ).undelegate("#countdown", "pagebeforehide", stop_app );
+            }
+    
+            console.log("Location #countdown")
+    
+            $( document ).delegate("#countdown", "pageinit", start_app);
+            $( document ).delegate("#countdown", "pagebeforehide", stop_app);
+    
+        </script>
+
+        
+        <header data-role="header" data-position="fixed">
+            
+            <a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
+            
+            <h1>Countdown timer</h1>
+            
+        </header>
+        
+        <section data-role="content">
+            
+            <div class="selector">
+                <canvas id="canvas" width="525" height="220">
+                    Your browser does not support the HTML 5 Canvas. 
+                </canvas>
+                <div class="row controls">
+                    <div class="eight columns centered">
+                        <a class="radius button start left" onclick="countdown_startbutton()">Start</a>
+                        <a class="radius button stop" onclick="countdown_stopbutton()">Stop</a>
+                        <a class="radius button reset right" onclick="countdown_resetbutton()">Reset</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="eight columns centered">
+                        <input id="countdown-secval" type="text" oninput="countdown_secinput()" value="300" size="5" style="font-size: 32px;">Seconds</input>
+                    </div>
+                </div>
+            </div>            
+        </section>
+        
+    </div>
+    <!-- /countdown -->
+        
+</body>
+</html>

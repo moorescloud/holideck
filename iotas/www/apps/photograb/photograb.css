@@ -1,0 +1,17 @@
+/*
+	@file: apps/photograb/photograb.css
+*/
+
+#photograb-app form {
+	margin: 10px 0 0 0;
+}
+
+#photograb-app .photograb-button { 
+	width: 100%;
+	border: 1px solid #fff; 
+	background: #bbb; 
+	color: white; 
+	padding: 10px; 
+	cursor: pointer; 
+	-webkit-border-radius: 4px; 
+}

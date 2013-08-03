@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=850" />
+<title>Countdown Timer</title>
+<script src="modernizr-1.6.min.js"></script>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+
+window.addEventListener('load', eventWindowLoaded, false);	
+
+var theCanvas;
+var context;
+
+function eventWindowLoaded() {
+	theCanvas = document.getElementById('canvas');
+	context = theCanvas.getContext('2d');
+	resetCountdown();
+	return;
+}
+
+function drawCountdown() {
+	context.fillStyle = "black";
+	context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+	context.font = "240px serif";
+	context.fillStyle = "white";
+	context.fillText(secs_to_time(count), 15, 180);
+}
+
+var startcount = 35;
+var count;
+var counter;
+
+function resetCountdown() {
+	startcount = parseInt($("#secval").val());
+	count = startcount;
+	drawCountdown();
+	//document.getElementById("timer").innerHTML= secs_to_time(count);
+}
+
+function secs_to_time(t) {
+
+	mins = Math.floor(t/60);
+	secs = t % 60;
+	ss = secs.toString();
+	if (ss.length < 2) {
+		ss = "0" + ss;
+	}
+	return mins.toString() + ":" + ss;
+}
+
+function startLight() {
+	jQuery.ajax({
+		url: '/cgi-bin/ajaxcolor', 
+		data: {color: "0xFF8080"}
+	});
+}
+
+function fireLight(t) {
+
+	if (t == 120) {
+		console.log("yellow");
+		jQuery.ajax({
+			url: '/cgi-bin/gradiencgi', 
+			data: { b: "0xFF8080",
+					e: "0xFFFF80",
+					s: "300" }
+		});	
+	} else {
+		if (t == 60) {
+			console.log("red");
+			jQuery.ajax({
+				url: '/cgi-bin/gradiencgi', 
+				data: { b: "0xFFFF80",
+						e: "0x80FF80",
+						s: "300" }
+			});
+		} else {
+			if (t <= 30) {
+				console.log("flashing");
+				if ((t % 2) == 0) {
+					jQuery.ajax({
+						url: '/cgi-bin/gradiencgi', 
+						data: { b: "0x80FF80",
+							    e: "0x808080",
+							    s: "45" }
+					});
+				} else {
+					jQuery.ajax({
+						url: '/cgi-bin/gradiencgi', 
+						data: { b: "0x808080",
+							    e: "0x80FF80",
+							    s: "45" }
+					});
+				}
+			}
+		}
+	}
+}
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+    clearInterval(counter);
+    //document.getElementById("timer").innerHTML= secs_to_time(count);
+    drawCountdown();
+    jQuery.ajax({
+		url: '/cgi-bin/gradiencgi', 
+		data: { b: "0x80FF80",
+				e: "0x808080",
+				s: "45" }
+	});
+    return;
+  }
+ fireLight(count);
+ //document.getElementById("timer").innerHTML= secs_to_time(count);
+ drawCountdown();
+}
+
+function startbutton(e) {
+	console.log("startbutton");
+	counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+	if (count == startcount) {
+		startLight();
+	}
+}
+
+function resetbutton(e) {
+	console.log("resetbutton");
+	clearInterval(counter);
+	resetCountdown();
+}
+
+function stopbutton(e) {
+	console.log("stopbutton");
+	clearInterval(counter);
+}
+
+function secinput(e) {
+	console.log("secinput");
+	startcount = parseInt($("#secval").val());
+	console.log(startcount);
+	resetCountdown();
+}
+</script>
+<style>
+.button {
+    background: #262C32;
+    font-size: 32px;
+    width: 100px;
+    padding: 9px;
+    letter-spacing: 1px;
+    border: none;
+    color: #EFDDA8;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+</style>
+</head>
+<body text="#FFFFFF" bgcolor="#000000">
+<!--
+<span id="timer"></span>
+--->
+<canvas id="canvas" width="650" height="400"  style="position: absolute; top: 50px; left: 50px;">
+		Your browser does not support the HTML 5 Canvas. 
+</canvas>
+<form style="position: absolute; top: 350px; left: 30px; font-size: 32px;">
+<button class="button" type="button" onclick="startbutton()" style="background: #009000">Start</button>
+<button class="button" type="button" onclick="stopbutton()" style="background: #e00000">Stop</button>
+<button class="button" type="button" onclick="resetbutton()" style="background: #0000e0; width: 110px;">Reset</button>
+<input id="secval" type="text" oninput="secinput()" value="300" size="5" style="font-size: 32px;">seconds</input>
+</form>
+
+</body>

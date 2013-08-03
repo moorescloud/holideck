@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Holiday Apps</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link rel="apple-touch-icon" href="/assets/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-startup-image" href="/assets/apple-touch-splash.png">
+	
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="css/holiday-app.css" />
+	<!--<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700' rel='stylesheet'>-->
+	<link rel="stylesheet" href="/assets/fonts/Droid_Serif/DroidSerif.ttf" />
+	<link rel="stylesheet" href="/assets/fonts/Droid_Serif/DroidSerif-Bold.ttf" />
+	<link rel="stylesheet" href="/assets/fonts/Droid_Serif/DroidSerif-BoldItalic.ttf" />
+	<link rel="stylesheet" href="/assets/fonts/Droid_Serif/DroidSerif-Italic.ttf" />
+	<link rel="stylesheet" href="/assets/fonts/Droid_Sans/DroidSans.ttf" />
+	<link rel="stylesheet" href="/assets/fonts/Droid_Sans/DroidSans-Bold.ttf" />	
+	<link rel="stylesheet" href="/assets/fonts/Droid_Sans_Mono/DroidSansMono.ttf" />
+
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery.mobile-1.3.1.js"></script>
+	<script src="js/iotas.js"></script>
+	<script src="js/holiday.js"></script>
+
+	<script>
+		
+		// Put the main script stuff in it
+		var addr = document.URL.slice(7,-1);
+		console.log(addr);
+		//var iotasrv = new iotas(document.URL);
+		//iotasrv.get_status();
+
+		// Specifically for the simulator we grab the URL out of the browser
+		// This is what we use to communicate with the simulator.
+		// A bit of a hack, but it seems to work.
+		var loc = window.location.hostname + ":" + window.location.port;
+		console.log(loc);
+
+		var defaultholidays = [ ['sim', loc ] ];
+		var holidays = [null, null, null];		// The array of lights
+		var currentLight = null;
+		var theApp = null;
+
+		// Create and setup the current lights
+		for (var j=0; j < defaultholidays.length; j++) {
+			holidays[j] = new Holiday(defaultholidays[j][1]);
+		}
+		currentLight = holidays[0];		// And we've created a holiday
+		console.log(currentLight)
+
+	</script>
+	
+</head>
+
+<body>
+	
+	<div data-role="page" id="apps">
+		
+		<aside data-role="panel" data-display="reveal" id="config">
+			
+			<h1>Holiday Configuration</h1>
+			
+			<hr />
+			
+			<div class="wifi-config">
+				
+				<h3>Wifi Network</h3>
+				
+				<label for="wifi-name" class="ui-hidden-accessible">Name</label>
+				<input type="text" name="wifi-name" id="wifi-name" placeholder="Network Name" value="">
+				
+				<label for="wifi-password" class="ui-hidden-accessible">Password</label>
+				<input type="password" name="wifi-password" id="wifi-password" placeholder="Password" value="" autocomplete="off">
+				
+			</div>
+			
+			<hr />
+			
+			<div class="strand-config">
+				
+				<h3>Holiday Strands</h3>
+				
+				<label for="strand-name" class="ui-hidden-accessible">Name</label>
+				<input type="text" name="strand-name" id="strand-name" placeholder="Strand Name" value="">
+				
+				<label for="strand-serial" class="ui-hidden-accessible">Serial</label>
+				<input disabled="disabled" type="text" name="strand-serial" id="strand-serial" placeholder="A1B2C3D4" value="">
+				
+				<a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="c" data-mini="true">icon only button</a>
+				
+			</div>
+			
+			<hr />
+			
+			<div class="brightness-config">
+				
+				<h3>Brightness</h3>
+				
+				<input type="range" name="slider-fill-mini" id="slider-fill-mini" value="80" min="0" max="100" data-mini="true" data-highlight="true" data-theme="c" data-track-theme="a">
+				
+			</div>
+			
+		</aside>
+		<!-- /.config -->
+		
+		<header data-role="header" data-position="fixed">
+			
+			<a href="#config" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Gear</a>
+			
+			<h1>Holiday Apps</h1>
+			
+		</header>
+	
+		<section data-role="content">
+			
+			<div class="ui-grid-b">
+			
+				<div class="ui-block-a">
+					<a href="apps/timer/" data-transition="slide">
+						<img src="apps/timer/app-icon-timer.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="apps/colorwheel/" data-transition="slide">
+						<img src="apps/colorwheel/app-icon-colorwheel.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<a href="apps/api-demo/" data-transition="slide">
+						<img src="apps/api-demo/app-icon-api-demo.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-a">
+					<a href="apps/rainbow/" data-transition="slide">
+						<img src="apps/rainbow/app-icon-rainbow.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="apps/afl/" data-transition="slide">
+						<img src="apps/afl/app-icon-afl.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<a href="apps/nrl/" data-transition="slide">
+						<img src="apps/nrl/app-icon-nrl.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-a">
+					<a href="apps/colorstring/" data-transition="slide">
+						<img src="apps/colorstring/app-icon-colorstring.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="apps/photograb/" data-transition="slide">
+						<img src="apps/photograb/app-icon-photograb.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<a href="apps/countdown/" data-transition="slide">
+						<img src="apps/countdown/app-icon-countdown.png" alt=""/>
+					</a>
+				</div>
+				
+			</div>
+			
+			<div class="paginator">
+				
+				<img src="assets/paginator.png" alt=""/>
+				
+			</div>
+			
+			<div class="strand">
+				
+				<img src="assets/strand-1.png" alt=""/>
+				
+			</div>
+			
+		</section>
+		
+	</div>
+	<!-- /apps -->
+		
+	<!-- X Page Template -->
+	<div data-role="page" id="x">
+		<header data-role="header" data-position="fixed">
+			<h1>X Title</h1>
+		</header>
+		<section data-role="content">
+			<p>X Content</p>
+		</section>
+	</div>
+	<!-- /x -->
+	
+</body>
+</html>

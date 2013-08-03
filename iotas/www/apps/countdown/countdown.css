@@ -1,0 +1,45 @@
+/*
+	@file: apps/countdown/countdown.css
+*/
+
+#countdown-app.reveal-modal {
+	top: 110px;
+}
+
+#countdown-app h2 {
+	padding-bottom: 50px;
+}
+
+#countdown-canvas {
+	position: absolute;
+	left: 110px;
+}
+
+#countdown-app .controls {
+	padding-top: 220px;
+}
+
+#countdown-app input {
+	height: 46px;
+}
+
+#countdown-app a.button:hover {
+	text-decoration: none;
+}
+
+#countdown-app a.button {
+	border: 1px solid white;
+}
+
+#countdown-app a.button.start {
+	background: green;
+}
+
+#countdown-app a.button.stop {
+	margin-left: 15px;
+	background: red;
+}
+
+#countdown-app a.button.reset {
+	background: #d6a614;
+}

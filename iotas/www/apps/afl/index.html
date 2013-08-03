@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Holiday &raquo; AFL</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link rel="apple-touch-icon" href="../../apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-startup-image" href="../../apple-touch-splash.png">
+	
+	<link rel="stylesheet" href="../../css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="../../css/holiday-app.css" />
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700' rel='stylesheet'>
+	
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/jquery.mobile-1.3.1.js"></script>
+	
+</head>
+
+<body>
+	
+	<div data-role="page" id="afl">
+
+		<script src="afl.js"></script>
+	
+		<script>
+			
+			//var theApp = null;		// Instance variable (and global) for the app object
+	
+			// Start the app by instancing its object and 
+			function start_app() {
+				theApp = new afl();		// Instance an app
+				theApp.appStart();		// And start the app up
+				$("ul li a").click(function () { 
+						var t = $(this).attr('href');
+						theApp.pickClub(t);
+					}
+				);
+			}
+	
+			function stop_app() {
+				theApp.appQuit();
+				$( document ).undelegate("#afl", "pageinit", start_app);
+				$( document ).undelegate("#afl", "pagebeforehide", stop_app );
+			}
+	
+			console.log("We seem to be in afl");
+	
+			$( document ).delegate("#afl", "pageinit", start_app);
+			console.log("pageinit listener attached");
+	
+			$( document ).delegate("#afl", "pagebeforehide", stop_app);
+	
+		</script>
+
+		<header data-role="header" data-position="fixed">
+			
+			<a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
+			
+			<h1>AFL Colours</h1>
+			
+		</header>
+		
+		<section data-role="content">
+			
+			<ul data-role="listview" data-theme="a" data-icon="check">
+		    <li>
+		    	<a href="#blues">
+			    	<img src="blues.png" alt=""/>
+			    	<p>Carlton</p>
+			    	<h3>Blues</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#bombers">
+			    	<img src="bombers.png" alt=""/>
+			    	<p>Essendon</p>
+			    	<h3>Bombers</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#bulldogs">
+			    	<img src="bulldogs.png" alt=""/>
+			    	<p>Western Bulldogs</p>
+			    	<h3>Bulldogs</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#cats">
+			    	<img src="cats.png" alt=""/>
+			    	<p>Geelong</p>
+			    	<h3>Cats</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#crows">
+			    	<img src="crows.png" alt=""/>
+			    	<p>Adelaide</p>
+			    	<h3>Crows</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#demons">
+			    	<img src="demons.png" alt=""/>
+			    	<p>Melbourne</p>
+			    	<h3>Demons</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#dockers">
+			    	<img src="dockers.png" alt=""/>
+			    	<p>Fremantle</p>
+			    	<h3>Dockers</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#eagles">
+			    	<img src="eagles.png" alt=""/>
+			    	<p>West Coast</p>
+			    	<h3>Eagles</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#giants">
+			    	<img src="giants.png" alt=""/>
+			    	<p>Greater Western Sydney</p>
+			    	<h3>Giants</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#hawks">
+			    	<img src="hawks.png" alt=""/>
+			    	<p>Hawthorn</p>
+			    	<h3>Hawks</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#kangaroos">
+			    	<img src="kangaroos.png" alt=""/>
+			    	<p>North Melbourne</p>
+			    	<h3>Kangaroos</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#lions">
+			    	<img src="lions.png" alt=""/>
+			    	<p>Brisbane</p>
+			    	<h3>Lions</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#magpies">
+			    	<img src="magpies.png" alt=""/>
+			    	<p>Collingwood</p>
+			    	<h3>Magpies</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#power">
+			    	<img src="power.png" alt=""/>
+			    	<p>Port Adelaide</p>
+			    	<h3>Power</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#saints">
+			    	<img src="saints.png" alt=""/>
+			    	<p>St Kilda</p>
+			    	<h3>Saints</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#suns">
+			    	<img src="suns.png" alt=""/>
+			    	<p>Gold Coast</p>
+			    	<h3>Suns</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#swans">
+			    	<img src="swans.png" alt=""/>
+			    	<p>Sydney</p>
+			    	<h3>Swans</h3>
+			    </a>
+		    </li>
+		    <li>
+		    	<a href="#tigers">
+			    	<img src="tigers.png" alt=""/>
+			    	<p>Richmond</p>
+			    	<h3>Tigers</h3>
+			    </a>
+		    </li>
+			</ul>
+			
+		</section>
+		
+	</div>
+	<!-- /afl -->
+		
+</body>
+</html>
