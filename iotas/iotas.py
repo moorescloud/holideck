@@ -298,10 +298,17 @@ def run():
 	try:
 		app.run(host='0.0.0.0', port=80, debug=False, server=the_srv)
 	except:
-		try:
-			app.run(host='0.0.0.0', port=8080, debug=False, server=the_srv)
-		except:
-			print "No port available, exiting..."
+
+		# Starting with port 8080, try to grab a port!
+		starting = True
+		socknum = 8080
+		while starting:
+			try:	
+				app.run(host='0.0.0.0', port=socknum, server=the_srv, debug=False)  # Start the server
+				starting = False
+			except socket.error as msg:
+				print("Port %s not available, trying another" % socknum)
+				socknum += 1
 
 if __name__ == '__main__':
 	run()

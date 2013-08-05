@@ -14,7 +14,7 @@ __author__ = 'Mark Pesce'
 __version__ = '0.01-dev'
 __license__ = 'MIT'
 
-import os, sys, json, random, threading, time, string 
+import os, sys, json, random, threading, time, string, socket 
 from fcntl import ioctl
 from termios import FIONREAD
 import holiday
@@ -45,7 +45,7 @@ class APIServer(threading.Thread):
 class Sing(threading.Thread):
 	""" Once again, borrowed from the Processing framework
 	    This thread calls setup() once
-	    Then calls loop at 10hz (probably should be 50hz eventually"""	
+	    Then calls loop at 50hz"""	
 
 	exiting = False			# When set to true by join() causes run() to exit
 	fifoname = os.path.join(os.path.expanduser('~'), 'pipelights.fifo')
@@ -103,7 +103,7 @@ class Sing(threading.Thread):
 					os.close(self.fifo)		# close the FIFO if it exists
 				return 						# Then fall, Caesar!
 			self.loop()						# And let it loop
-			time.sleep(.1)					# At 10 hz	
+			time.sleep(.2)					# At 50 hz	
 
 	def join(self):
 		"""We join when it's time to die"""
@@ -114,7 +114,16 @@ def run():
 	singer = Sing()				# Initialize Sing
 	singer.start()				# And get it going
 
-	app.run(host='0.0.0.0', port=8888, server='cherrypy', debug=False)  # Start the server
+	starting = True
+	socknum = 8888
+	while starting:
+		try:	
+			app.run(host='0.0.0.0', port=socknum, server='cherrypy', debug=False)  # Start the server
+			starting = False
+		except socket.error as msg:
+			print("Port %s not available, trying another" % socknum)
+			socknum += 1
+
 	singer.join()				# When server terminates, signal the Sing thread to exit
 
 if __name__ == '__main__':	

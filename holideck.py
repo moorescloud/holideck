@@ -36,4 +36,16 @@ if __name__ == '__main__':
 	# Start the iotas Process and join it
 	iop = Process(target=iotas.iotas.run)
 	iop.start()
-	iop.join()
+
+	# Now we wait.  When we get a control-C, we exit -- hopefully.
+	while True:
+		try:
+			time.sleep(.1)
+		except KeyboardInterrupt:
+			print("Terminating simulator...")
+			iop.terminate()
+			spp.terminate()
+			print("Exiting.")
+			sys.exit(0)
+
+
