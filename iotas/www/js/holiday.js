@@ -87,7 +87,12 @@ function Holiday(address) {
 	function fast2json() {
 		output = "{ \"lights\": [ ";
 		for (var j = 0; j < this.fastbulbs.length; j++) {
-			output = output + "\"" + "#" + this.fastbulbs[j].toString(16) + "\"";
+
+			// fixed this to yield a full-length string every time
+			o_r = (this.fastbulbs[j] >> 16);
+			o_g = (this.fastbulbs[j] >> 8) & 0xff;
+			o_b = (this.fastbulbs[j] & 0xff);
+			output = output + "\"" + rgb2hex(o_r, o_g, o_b) + "\"";
 			if ((j+1) != this.fastbulbs.length) {
 				output = output + ", ";
 			}
