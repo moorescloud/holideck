@@ -13,6 +13,17 @@ __author__ = 'Mark Pesce'
 __version__ = '0.01-dev'
 __license__ = 'MIT'
 
+import sys, json
+try:
+	import requests
+except ImportError:
+	sys.path.append('..')		# In holideck, the requests module is a directory above us
+	try:
+		import requests
+	except:
+		print "Could not load requests module, and we tried pretty hard."
+		sys.exit(0)
+
 class Holiday:
 
 	remote = False
