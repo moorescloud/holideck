@@ -42,7 +42,7 @@ if __name__ == '__main__':
 		try:
 			time.sleep(.1)
 		except KeyboardInterrupt:
-			print("Terminating simulator...")
+			print("\nTerminating simulator...")
 			iop.terminate()
 			spp.terminate()
 			print("Exiting.")

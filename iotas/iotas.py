@@ -297,7 +297,7 @@ def run():
 	# Try to run on port 80, if that fails, go to 8080
 	try:
 		app.run(host='0.0.0.0', port=80, debug=False, server=the_srv)
-	except:
+	except socket.error as msg:
 
 		# Starting with port 8080, try to grab a port!
 		starting = True
