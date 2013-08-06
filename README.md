@@ -1,7 +1,7 @@
 HOLIDECK
 ========
 
-The development and simulation tool for Holiday by MooresCloud.
+The development and simulation tool for [Holiday by MooresCloud](http://holiday.moorescloud.com).
 
 Holideck provies a full simulation environment for Holiday by MooresCloud.
 It is functionally identical the behavior of the actual hardware, which
@@ -18,7 +18,7 @@ The HTML5 simulator will preferentially try open port 8888;
 if that port is unavailable, it will increment the port number
 until it finds a free port.
 
-IoTAS, the Internet of Things Access Server will preferentially
+IoTAS, the Internet of Things Access Server, will preferentially
 try to open port 80 (which is only possible if python has been
 run with root privleges), or if running as a user program, will 
 try to open port 8080.  This port is often occupied by other
@@ -103,9 +103,11 @@ This will be documented in the holideck wiki.
 
 MooresCloud has created a number of demonstration HTML5-based
 web apps. These can be used and adapted for your own web apps.  
+
 A number of these apps, although included within holideck, are not
-yet fully functional and should not be used. The apps which are 
-functional include:
+yet fully functional and should not be used. 
+
+The apps which are functional include:
 
 *Colorwheel* - Select a colour from the colorwheel, and the entire
 string of lights on the simulator will reflect the color change.
@@ -134,3 +136,5 @@ is included in this repo.
 
 Mark Pesce  
 [MooresCloud Pty Ltd](http://moorescloud.com)
+
+August 2013
