@@ -141,7 +141,17 @@ hr {
   background-size: contain;
 }
 
-/* NRL App Lists */
+/* AFL App */
+
+#afl {
+	background: #000 url(../apps/afl/afl-background.png) repeat-y 50% 0% fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+/* App Lists */
 
 .ui-content .ui-listview, 
 .ui-panel-inner > .ui-listview {
@@ -164,14 +174,6 @@ hr {
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 0 1px 0 #111;
-/*
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#2d2d2d), to(#000));
-	background-image: -webkit-linear-gradient( #2d2d2d, #000);
-	background-image:    -moz-linear-gradient( #2d2d2d, #000);
-	background-image:     -ms-linear-gradient( #2d2d2d, #000);
-	background-image:      -o-linear-gradient( #2d2d2d, #000);
-	background-image:         linear-gradient( #2d2d2d, #000);
-*/
 }
 
 .ui-btn-hover-a {
@@ -181,14 +183,6 @@ hr {
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 0 1px 0 #111;
-/*
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#2d2d2d));
-	background-image: -webkit-linear-gradient( #555, #000);
-	background-image:    -moz-linear-gradient( #000, #2d2d2d);
-	background-image:     -ms-linear-gradient( #000, #2d2d2d);
-	background-image:      -o-linear-gradient( #000, #2d2d2d);
-	background-image:         linear-gradient( #000, #2d2d2d);
-*/
 }
 
 .ui-li, .ui-li.ui-field-contain {
@@ -201,9 +195,128 @@ hr {
 	border-top-width: 1px solid #111;
 }
 
+
 /* Colorwheel App */
 
 #colorwheel {
 	background: #000;
 }
 
+#colorwheel .selector {
+	margin: 0 auto;
+	width: 290px;
+}
+
+/* Colorwheel Pick & Complement */
+
+#colorwheel .circle {
+	width: 100px;
+	height: 100px;
+	background: #fff; 
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	float: left;
+}
+
+#colorwheel .circle.pick {
+	margin-top: -15px;
+	width: 100px;
+	height: 100px;
+	background: crimson; 
+}
+
+#colorwheel .circle.complement { 
+	margin-top: 30px;
+	width: 70px;
+	height: 70px;
+	background: #3e19d0;
+}
+
+/* API Demo App */
+
+#api-demo {
+	background: #000;
+}
+
+#api-demo p {
+	margin: 0 auto;
+	width: 80%;
+}
+
+#api-demo .switch {
+	margin: 0 auto;
+	width: 100px;
+}
+
+#api-demo .ui-btn-active {
+/* 	border: 1px solid #2374a6; */
+/* 	background: #5393c5; */
+	background: crimson;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #3373a5;
+	text-decoration: none;
+/*
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 ), to( #6facd5 ));
+	background-image: -webkit-linear-gradient( #5393c5, #6facd5 );
+	background-image: -moz-linear-gradient( #5393c5, #6facd5 );
+	background-image: -ms-linear-gradient( #5393c5, #6facd5 );
+	background-image: -o-linear-gradient( #5393c5, #6facd5 );
+	background-image: linear-gradient( #5393c5, #6facd5 );
+*/
+	background-image: none;
+}
+
+/* Rainbow App */
+
+#rainbow {
+	background: #000;
+}
+
+#rainbow .switch {
+	margin: 0 auto;
+	width: 100px;
+}
+
+#rainbow .ui-btn-active {
+/* 	border: 1px solid #2374a6; */
+/* 	background: #5393c5; */
+	background: blue;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #3373a5;
+	text-decoration: none;
+/*
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 ), to( #6facd5 ));
+	background-image: -webkit-linear-gradient( #5393c5, #6facd5 );
+	background-image: -moz-linear-gradient( #5393c5, #6facd5 );
+	background-image: -ms-linear-gradient( #5393c5, #6facd5 );
+	background-image: -o-linear-gradient( #5393c5, #6facd5 );
+	background-image: linear-gradient( #5393c5, #6facd5 );
+*/
+	background-image: none;
+}
+
+/* Timer App */
+
+#timer {
+	background: #000 url(../apps/timer/timer-background.png) no-repeat 50% 0% fixed;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: auto;
+}
+
+#timer .times {
+	margin: 0 auto;
+	width: 175px;
+}
+
+#timer .timerset {
+	margin-left: 37px;
+	position: absolute;
+	bottom: 20px;
+}
