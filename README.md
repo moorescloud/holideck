@@ -54,7 +54,7 @@ simulates the 50 individually-addressible 24-bit colour globes
 on the Holiday.
 
 To use simpype, point a browser to the simulator's web page 
-- generally that will be `http://localhost:8080`, with the caveats
+- generally that will be `http://localhost:8888`, with the caveats
 as given above.
 
 You should see something like this:
