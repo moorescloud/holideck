@@ -35,7 +35,7 @@ monitor.
 It requires some prerequisites to be installed, specifically 
 [PortAudio](http://www.portaudio.com/) library and the
 [PyAudio](http://people.csail.mit.edu/hubert/pyaudio/) module. Consult the documentation at those websites for more details.  (Ubuntu/Debian
-users can probably both it with `sudo apt-get install python-pyaudio`, but
+users can probably install both with `sudo apt-get install python-pyaudio`, but
 for OSX and Windows it's considerably more involved.)
 
 It's invoked as follows:
