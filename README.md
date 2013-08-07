@@ -12,13 +12,14 @@ Invocation
 
 `% python holideck.py`
 
-When holideck launches it opens two ports on the localhost. 
+When holideck launches it opens two ports on the localhost, one for 
+simulator access, the other presenting the web app interface to Holiday. 
 
-The HTML5 simulator will preferentially try open port 8888; 
+The HTML5 simulator simpype will try open port 8888; 
 if that port is unavailable, it will increment the port number
 until it finds a free port.
 
-IoTAS, the Internet of Things Access Server, will preferentially
+IoTAS, the Internet of Things Access Server, will
 try to open port 80 (which is only possible if python has been
 run with root privleges), or if running as a user program, will 
 try to open port 8080.  This port is often occupied by other
@@ -35,7 +36,7 @@ it is initializing.
 To quit holideck, simply type a Control-C in the terminal window.
 
 Holideck - specifically IoTAS - currently produces voluminous output
-for debugging purposes.
+for debugging purposes. Eventually, this will be moved to a log.
 
 
 Using Holideck
