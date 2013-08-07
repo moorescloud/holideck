@@ -84,12 +84,12 @@ application, control and configuration interface for Holiday.
 The interface for IoTAS looks best on a mobile device.  
 After holideck has been launched, point a mobile device to port
 8080 (or possibly higher, with the caveats given above) on the 
-device running holideck.  
+computer running holideck.  
 
-For example, if the device named 
-iris.local is running holideck, point your mobile to 
-`http:\\iris.local:8080`.  You should see the home screen
-for Holiday's HTML5 web app interface:
+For example, if the computer running holideck is named 
+iris.local, you should point your mobile browser to 
+`http://iris.local:8080`.  The home screen
+for Holiday's HTML5 web app interface should then load:
 
 ![holiday home screen](http://dev.moorescloud.com/wp-content/uploads/2013/08/holideck-home.jpg)
 
