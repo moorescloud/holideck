@@ -247,7 +247,7 @@ def afl():
 	return json.dumps(resp)
     
 
-def run():
+def run(port):
 	"""invoke run when loading as a module"""
 	# Instance the devices that we're going to control
 	# Add each to the control ring. For no very good reason.
@@ -301,7 +301,7 @@ def run():
 
 		# Starting with port 8080, try to grab a port!
 		starting = True
-		socknum = 8080
+		socknum = port
 		while starting:
 			try:	
 				app.run(host='0.0.0.0', port=socknum, server=the_srv, debug=False)  # Start the server
@@ -311,4 +311,4 @@ def run():
 				socknum += 1
 
 if __name__ == '__main__':
-	run()
+	run(port=8080)

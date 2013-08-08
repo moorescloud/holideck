@@ -14,6 +14,7 @@ __version__ = '0.01-dev'
 __license__ = 'MIT'
 
 import sys, time
+import ConfigParser
 
 # Multiprocessing requires Python 2.6 or better
 v = sys.version_info
@@ -27,15 +28,31 @@ import simpype.simpype
 
 if __name__ == '__main__':
 
+	# Read the config file for port numbers
+	try:
+		config = ConfigParser.SafeConfigParser()
+		config.read('holideck.config')
+		spp_port = int(config.get('simpype', 'port'))
+		iop_port = int(config.get('iotas', 'port'))
+	except:
+		spp_port = 8888		# If any error use default values
+		iop_port = 8080
+
 	# Start the simpype Process
-	spp = Process(target=simpype.simpype.run)
+	spp = Process(target=simpype.simpype.run, args=(spp_port,))
 	spp.start()
 
 	time.sleep(1)
 
 	# Start the iotas Process and join it
-	iop = Process(target=iotas.iotas.run)
+	iop = Process(target=iotas.iotas.run, args=(iop_port,))
 	iop.start()
+
+	time.sleep(1)
+
+	print
+	print "Simulator should be available on http://localhost:%d" % spp_port
+	print "Web interface should be available on http://localhost:%d" % iop_port
 
 	# Now we wait.  When we get a control-C, we exit -- hopefully.
 	while True:

@@ -110,13 +110,14 @@ class Sing(threading.Thread):
 		"""We join when it's time to die"""
 		self.exiting = True		# Set an exit flag
 
-def run():
+def run(port):
 	"""So this can be loaded as a module and run"""
+	print "Port = %d" % port
 	singer = Sing()				# Initialize Sing
 	singer.start()				# And get it going
 
 	starting = True
-	socknum = 8888
+	socknum = port
 	while starting:
 		try:	
 			app.run(host='0.0.0.0', port=socknum, server='cherrypy', debug=False)  # Start the server
@@ -128,7 +129,7 @@ def run():
 	singer.join()				# When server terminates, signal the Sing thread to exit
 
 if __name__ == '__main__':	
-	run()
+	run(port=8888)
 
 
 
