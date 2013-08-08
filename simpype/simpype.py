@@ -69,27 +69,28 @@ class Sing(threading.Thread):
 
 	def loop(self):
 		"""Check the FIFO, and block if we're waiting for input."""
-		s = os.read(self.fifo, 350)		# That should read in a whole blast, I would think
-		if len(s) == 0:
-			return
-		else:
-			size = len(s)
-			#print "We have a message of length %d" % size
-			if size == 350:		# Do we have a whole message?
-				#print s
-				ssplit = string.split(s,'\n')
-				#ssplit = ssplit[:-1]
-				#print ssplit
-				global hol
-				lednum = 0
-				for gloz in ssplit[:-1]:
-					rgb = string.atoi(gloz, 16)
-					hol.globes[lednum][0] = rgb >> 16
-					hol.globes[lednum][1] = (rgb >> 8) & 0xFF
-					hol.globes[lednum][2] = rgb & 0xFF
-					lednum = lednum + 1
+		while True:
+			s = os.read(self.fifo, 350)		# That should read in a whole blast, I would think
+			if len(s) == 0:					# Read repeatedly until we get nothing from the FIFO
+				return
 			else:
-				print "Message too short!"
+				size = len(s)
+				#print "We have a message of length %d" % size
+				if size == 350:		# Do we have a whole message?
+					#print s
+					ssplit = string.split(s,'\n')
+					#ssplit = ssplit[:-1]
+					#print ssplit
+					global hol
+					lednum = 0
+					for gloz in ssplit[:-1]:
+						rgb = string.atoi(gloz, 16)
+						hol.globes[lednum][0] = rgb >> 16
+						hol.globes[lednum][1] = (rgb >> 8) & 0xFF
+						hol.globes[lednum][2] = rgb & 0xFF
+						lednum = lednum + 1
+				else:
+					print "Message too short!"
 		return
 
 
