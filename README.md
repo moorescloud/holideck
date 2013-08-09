@@ -127,10 +127,12 @@ More Caveats
 ------------
 
 Holideck has been tested on Linux (Ubuntu & Mint), OSX 10.7 & 10.8.  
-It has not been tested under Windows - and while there is no reason
-to presume it will not work perfectly, YMMV.
+There have been problems under Windows, and the latest release should have
+fixed those problems, but we rely on reports from you to let us know
+if we've done our jobs.  So if you have a Windows system, please
+give it a test!
 
-This is a first release; there are bound to be numerous problems. We
+This is an early release; there are bound to be numerous problems. We
 apologize in advance for this.
 
 If you have any serious problems, please mail me at mpesce AT moorescloud DOT com.
