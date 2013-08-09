@@ -18,8 +18,8 @@ import os, sys, json, random, threading, time, string, socket
 import Queue as Kueue
 from multiprocessing import Queue
 
-from fcntl import ioctl
-from termios import FIONREAD
+#from fcntl import ioctl
+#from termios import FIONREAD
 import holiday
 from bottle import Bottle, run, static_file, post, request
 app = Bottle()
