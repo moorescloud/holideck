@@ -247,7 +247,7 @@ def afl():
 	return json.dumps(resp)
     
 
-def run(port, queue):
+def old_run(port):
 	"""invoke run when loading as a module in the simulator"""
 	# Instance the devices that we're going to control
 	# Add each to the control ring. For no very good reason.
@@ -282,7 +282,7 @@ def run(port, queue):
 	#app.licht = devices.moorescloud.holiday.driver.Holiday(remote=True, address='yule.local')	# Connect to a real device
 	import devices.moorescloud.holiday.driver as driver
 	#app.licht = driver.Holiday(remote=lichtremote, address=lichtname, name=lichtapiname)	# Connect to a real device
-	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
+	app.licht = driver.Holiday(remote=False, address='sim', name='sim')
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#the_srv = 'wsgiref'  
@@ -310,5 +310,32 @@ def run(port, queue):
 				print("Port %s not available, trying another" % socknum)
 				socknum += 1
 
+def run(port, queue):
+	"""invoke run when loading as a module in the simulator"""
+	# Instance the devices that we're going to control
+	# Add each to the control ring. For no very good reason.
+	#
+	lichtname = 'sim'
+	lichtremote = False
+	lichtapiname = 'sim'		
+
+	import devices.moorescloud.holiday.driver as driver
+	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
+	app.licht.create_routes(app)										# Adds in all the routes for device
+
+	#the_srv = 'wsgiref'  
+	the_srv = 'cherrypy'
+
+	# Starting with port 8080, try to grab a port!
+	starting = True
+	socknum = port
+	while starting:
+		try:	
+			app.run(host='0.0.0.0', port=socknum, server=the_srv, debug=False)  # Start the server
+			starting = False
+		except socket.error as msg:
+			print("Port %s not available, trying another" % socknum)
+			socknum += 1
+
 if __name__ == '__main__':
-	run(port=8080)
+	old_run(port=8080)

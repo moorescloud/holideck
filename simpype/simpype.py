@@ -73,7 +73,7 @@ class Sing(threading.Thread):
 	def setup(self):
 		"""Create & initialize any instance variables and any other setup here"""
 		"""This is where we want to keep track of the queue"""
-		print "Queue %s" % (self.queue,)
+		#print "Queue %s" % (self.queue,)
 		return
 
 	def loop(self):

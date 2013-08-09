@@ -58,7 +58,7 @@ class Holiday:
 			self.remote = False
 			if address == 'sim':
 				self.queue = queue
-				print "IoTAS Queue at %s" % (self.queue,)
+				#print "IoTAS Queue at %s" % (self.queue,)
 			else:
 				self.pipename = "/run/pipelights.fifo"
 				self.address = address
