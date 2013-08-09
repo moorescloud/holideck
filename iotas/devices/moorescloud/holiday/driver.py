@@ -16,10 +16,11 @@ __license__ = 'MIT'
 import subprocess, time, os
 import requests 
 import json
+from multiprocessing import Queue 
 from bottle import request
 
 class Holiday:
-	def __init__(self, remote=False, address='sim', name='nameless'):
+	def old__init__(self, remote=False, address='sim', name='nameless'):
 		self.numleds = 50
 		self.leds = []			# Array of LED values. This may actually exist elsewhere eventually.
 		self.address = ''
@@ -37,6 +38,34 @@ class Holiday:
 				self.pipe = open(self.pipename,"wb")
 			except:
 				print "Couldn't open the pipe, there's gonna be trouble!"
+			ln = 0
+		else:
+			self.address = address
+			self.remote = True
+
+		for ln in range(self.numleds):
+			self.leds.append([0x00, 0x00, 0x00])	# Create and clear an array of RGB LED values
+
+		return
+
+	def __init__(self, remote=False, address='sim', name='nameless', queue=None):
+		self.numleds = 50
+		self.leds = []			# Array of LED values. This may actually exist elsewhere eventually.
+		self.address = ''
+		self.name = name
+
+		if remote == False:
+			self.remote = False
+			if address == 'sim':
+				self.queue = queue
+				print "IoTAS Queue at %s" % (self.queue,)
+			else:
+				self.pipename = "/run/pipelights.fifo"
+				self.address = address
+				try:
+					self.pipe = open(self.pipename,"wb")
+				except:
+					print "Couldn't open the pipe, there's gonna be trouble!"
 			ln = 0
 		else:
 			self.address = address
@@ -266,7 +295,7 @@ class Holiday:
 			return { 'value': False }
 		return { 'value': True }
 
-	def render(self):
+	def old_render(self):
 		"""Render the LED array to the Light"""
 		"""This version is safe because it renders to a string in memory"""
 		if (self.remote == True):
@@ -293,6 +322,29 @@ class Holiday:
 			#os.system("""%s | /srv/http/cgi-bin/setlights""" % echo)
 		return
 
+	def render(self):
+		"""Render the LED array to the Light"""
+		"""This version is safe because it renders to a string in memory"""
+		if (self.remote == True):
+			hol_vals = []
+			for glz in self.leds:
+				hol_vals.append("#%02x%02x%02x" % (glz[0], glz[1], glz[2]))
+			hol_msg = { "lights": hol_vals }
+			hol_msg_str = json.dumps(hol_msg)
+			print hol_msg_str
+			urlstr = 'http://%s/device/light/setlights' % self.address
+			r = requests.put(urlstr, data=hol_msg_str)
+		else:
+			echo = ""
+			ln = 0
+			while (ln < self.numleds):
+				tripval = (self.leds[ln][0] * 65536) + (self.leds[ln][1] * 256) + self.leds[ln][2]
+				#echo = echo + "%6X" % tripval + "\\" + "\\" + "x0a"  # magic pixie formatting eh?
+				echo = echo + "%06X\n" % tripval
+				ln = ln+1
+			#print echo
+			self.queue.put(echo, block=False)
+		return
 		
 	def on(self):
 		return set_light_values([255,255,255])

@@ -22,7 +22,7 @@ if v[0] != 2 or v[1] < 6:
 	print("holideck requires Python 2.6.x or Python 2.7.x -- aborting")
 	sys.exit(0)
 
-from multiprocessing import Process
+from multiprocessing import Process, Queue
 import iotas.iotas 
 import simpype.simpype
 
@@ -38,14 +38,17 @@ if __name__ == '__main__':
 		spp_port = 8888		# If any error use default values
 		iop_port = 8080
 
+	# Create a Queue instance so the processes can share the datas
+	q = Queue()
+
 	# Start the simpype Process
-	spp = Process(target=simpype.simpype.run, args=(spp_port,))
+	spp = Process(target=simpype.simpype.run, kwargs={ 'port': spp_port, 'queue': q})
 	spp.start()
 
-	time.sleep(1)
+	#time.sleep(1)
 
 	# Start the iotas Process and join it
-	iop = Process(target=iotas.iotas.run, args=(iop_port,))
+	iop = Process(target=iotas.iotas.run, kwargs={ 'port': iop_port, 'queue': q})
 	iop.start()
 
 	time.sleep(1)

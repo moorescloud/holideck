@@ -247,8 +247,8 @@ def afl():
 	return json.dumps(resp)
     
 
-def run(port):
-	"""invoke run when loading as a module"""
+def run(port, queue):
+	"""invoke run when loading as a module in the simulator"""
 	# Instance the devices that we're going to control
 	# Add each to the control ring. For no very good reason.
 	#
@@ -282,16 +282,16 @@ def run(port):
 	#app.licht = devices.moorescloud.holiday.driver.Holiday(remote=True, address='yule.local')	# Connect to a real device
 	import devices.moorescloud.holiday.driver as driver
 	#app.licht = driver.Holiday(remote=lichtremote, address=lichtname, name=lichtapiname)	# Connect to a real device
-	app.licht = driver.Holiday(remote=False, address='sim', name='sim')
+	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#the_srv = 'wsgiref'  
 	the_srv = 'cherrypy'
 	#print app.licht
 
-	print 'Routes'
-	for rt in app.routes:
-		print rt.method, rt.rule, rt.callback
+	#print 'Routes'
+	#for rt in app.routes:
+	#	print rt.method, rt.rule, rt.callback
 	
 	print "Running..."
 	# Try to run on port 80, if that fails, go to 8080
