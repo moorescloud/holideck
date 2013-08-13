@@ -1,0 +1,20 @@
+/* Timer App */
+
+#timer {
+	background: #000 url(timer-background.png) no-repeat 50% 0% fixed;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: auto;
+}
+
+#timer .times {
+	margin: 0 auto;
+	width: 175px;
+}
+
+#timer .timerset {
+	margin-left: 37px;
+	position: absolute;
+	bottom: 20px;
+}

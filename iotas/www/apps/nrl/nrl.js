@@ -1,6 +1,7 @@
 function nrl() {
 	
 	console.log("nrl");
+	
 	this.appStart = appStart;
 	this.appQuit = appQuit;
 	this.pickClub = pickClub;
@@ -54,6 +55,7 @@ function nrl() {
 
 	function appStart() {
 		console.log("nrl.appStart");
+		$("head").append('<link rel="stylesheet" href="nrl.css" />');
 	}
 	
 	function appQuit() {

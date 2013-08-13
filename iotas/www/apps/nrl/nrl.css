@@ -1,0 +1,51 @@
+/* NRL App */
+
+#nrl {
+	background: #000 url(nrl-background.png) repeat-y 50% 0% fixed;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+#nrl .ui-content .ui-listview, 
+#nrl .ui-panel-inner > .ui-listview {
+	margin: -15px;
+	margin-top: 0;
+}
+
+#nrl .ui-li-desc {
+	display: block;
+	margin: .5em 0 -.6em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#nrl .ui-btn-up-a {
+	border: 1px solid #111;
+	background: #333;
+	background: rgba(0, 0, 0, .8); /* No Images */
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 1px 0 #111;
+}
+
+#nrl .ui-btn-hover-a {
+	border: 1px solid #000;
+	background: #444;
+	background: rgba(0, 0, 0, .7); /* No Images */
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 1px 0 #111;
+}
+
+#nrl .ui-li, .ui-li.ui-field-contain {
+	display: block;
+	margin: 0;
+	position: relative;
+	overflow: visible;
+	text-align: left;
+	border-width: 0;
+	border-top-width: 1px solid #111;
+}

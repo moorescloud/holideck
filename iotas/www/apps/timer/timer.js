@@ -8,6 +8,7 @@ function timer() {
 	// Start App
 	function appStart() {
 		console.log("timer.appStart");
+		$("head").append('<link rel="stylesheet" href="timer.css" />');
 	}
 	
 	// Quit App

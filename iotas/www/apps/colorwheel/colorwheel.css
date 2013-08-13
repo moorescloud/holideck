@@ -1,0 +1,34 @@
+/* Colorwheel App */
+
+#colorwheel {
+	background: #000;
+}
+
+#colorwheel .selector {
+	margin: 0 auto;
+	width: 290px;
+}
+
+#colorwheel .circle {
+	width: 100px;
+	height: 100px;
+	background: #fff; 
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	float: left;
+}
+
+#colorwheel .circle.pick {
+	margin-top: -15px;
+	width: 100px;
+	height: 100px;
+	background: crimson; 
+}
+
+#colorwheel .circle.complement { 
+	margin-top: 30px;
+	width: 70px;
+	height: 70px;
+	background: #3e19d0;
+}

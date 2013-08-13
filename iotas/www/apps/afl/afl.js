@@ -50,10 +50,9 @@ function afl() {
 		currentLight.fastlights();		// Render to the device
 	}
 
-
-
 	function appStart() {
 		console.log("afl.appStart");
+		$("head").append('<link rel="stylesheet" href="afl.css" />');
 	}
 	
 	function appQuit() {

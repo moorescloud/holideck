@@ -27,6 +27,7 @@ function colorwheel() {
 	
 	function appStart() {
 		console.log("colorwheel.appStart");
+		$("head").append('<link rel="stylesheet" href="colorwheel.css" />');
 		this.tileSheet=new Image();
 		$(this.tileSheet).load(colorwheelLoaded);
 		this.tileSheet.src="colorwheel.png";

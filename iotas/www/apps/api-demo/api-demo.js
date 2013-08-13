@@ -2,9 +2,6 @@ function apidemo() {
 	
 	console.log("function apidemo()");
 	
-	// Insert App Styles
-	$("head").append('<link rel="stylesheet" href="api-demo.css" />');
-	
 	this.appStart = appStart;
 	this.appQuit = appQuit;
 	this.demoStart = demoStart;
@@ -42,6 +39,7 @@ function apidemo() {
 	// Start App
 	function appStart() {
 		console.log("api-demo.appStart");
+		$("head").append('<link rel="stylesheet" href="api-demo.css" />');
 	}
 	
 	// Quit App
