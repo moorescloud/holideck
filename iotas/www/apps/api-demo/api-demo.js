@@ -2,6 +2,9 @@ function apidemo() {
 	
 	console.log("function apidemo()");
 	
+	// Insert App Styles
+	$("head").append('<link rel="stylesheet" href="api-demo.css" />');
+	
 	this.appStart = appStart;
 	this.appQuit = appQuit;
 	this.demoStart = demoStart;
@@ -13,7 +16,8 @@ function apidemo() {
 	this.timer = timer;
 	this.counter = null;
 	this.redwhite = redwhite;	
-
+	
+	// Timer 
 	function timer() {
 	
 		theApp.fillarray[theApp.fillindex]();	// Do the appropriate filling algorithm

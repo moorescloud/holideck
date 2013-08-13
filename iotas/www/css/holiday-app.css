@@ -277,42 +277,6 @@ hr {
 	background: #3e19d0;
 }
 
-/* API Demo App */
-
-#api-demo {
-	background: #000;
-}
-
-#api-demo p {
-	margin: 0 auto;
-	width: 80%;
-}
-
-#api-demo .switch {
-	margin: 0 auto;
-	width: 100px;
-}
-
-#api-demo .ui-btn-active {
-/* 	border: 1px solid #2374a6; */
-/* 	background: #5393c5; */
-	background: crimson;
-	font-weight: bold;
-	color: #fff;
-	cursor: pointer;
-	text-shadow: 0 1px 0 #3373a5;
-	text-decoration: none;
-/*
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 ), to( #6facd5 ));
-	background-image: -webkit-linear-gradient( #5393c5, #6facd5 );
-	background-image: -moz-linear-gradient( #5393c5, #6facd5 );
-	background-image: -ms-linear-gradient( #5393c5, #6facd5 );
-	background-image: -o-linear-gradient( #5393c5, #6facd5 );
-	background-image: linear-gradient( #5393c5, #6facd5 );
-*/
-	background-image: none;
-}
-
 /* Rainbow App */
 
 #rainbow {
