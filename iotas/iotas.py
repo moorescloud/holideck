@@ -23,8 +23,12 @@ app.licht = 0
 app.toggleState = False
 
 # Add in SWIFT modules
-import swift.swift as swifty
-swift_obj = swifty.Swift(bottle=app)
+try:
+	import swift.swift as swifty
+	swift_obj = swifty.Swift(bottle=app)
+	print "SWIFT capabilities"
+except ImportError:
+	print "No SWIFT capabilities"
 
 #docroot = '/home/mpesce/iotas'
 docroot = os.path.join(os.getcwd(), 'iotas') 		# Hopefully we startup in this directory
