@@ -23,8 +23,12 @@ app.licht = 0
 app.toggleState = False
 
 # Add in SWIFT modules
-import swift.swift as swifty
-swift_obj = swifty.Swift(bottle=app)
+try:
+	import swift.swift as swifty
+	swift_obj = swifty.Swift(bottle=app)
+	print "SWIFT capabilities"
+except ImportError:
+	print "No SWIFT capabilities"
 
 #docroot = '/home/mpesce/iotas'
 docroot = os.path.join(os.getcwd(), 'iotas') 		# Hopefully we startup in this directory
@@ -326,6 +330,9 @@ def run(port, queue):
 	import devices.moorescloud.holiday.driver as driver
 	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
 	app.licht.create_routes(app)										# Adds in all the routes for device
+
+	#for rt in app.routes:
+	#	print rt.method, rt.rule, rt.callback
 
 	#the_srv = 'wsgiref'  
 	the_srv = 'cherrypy'
