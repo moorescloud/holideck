@@ -29,13 +29,43 @@ function photograb() {
 	this.context = this.theCanvas.getContext('2d');
 	console.log("Got context");
 	console.log(screen.width, screen.height);
+
+	// Fill the canvas area with black methinks
+	$("#canvas").css('background-color', '#000');
+
+	this.thePainter = document.getElementById('paintarea');
+	this.painterContext = this.thePainter.getContext('2d');
+	console.log("Got painter");
+
+	// Fill the painter area with dark gray methinks
+	$("#paintarea").css('background-color', '#3f3f3f');
 	
 	this.theCanvas.addEventListener("mousemove", onSampMouseMove, false);
 	this.theCanvas.addEventListener("click", onSampMouseClick, false);
 	this.theCanvas.addEventListener("touchstart", onSampTouchStart, false);
 	this.theCanvas.addEventListener("touchmove", onSampTouchMove, false);
 
-	
+	this.thePainter.addEventListener("mousemove", onPaintMouseMove, false);
+	this.thePainter.addEventListener("click", onPaintMouseClick, false);
+	this.thePainter.addEventListener("touchstart", onPaintTouchStart, false);
+	this.thePainter.addEventListener("touchmove", onPaintTouchMove, false);	
+
+	function onPaintMouseMove(e) {
+		console.log('onPaintMouseMove');
+	}
+
+	function onPaintMouseClick(e) {
+		console.log('onPaintMouseClick');
+	}
+
+	function onPaintTouchStart(e) {
+		console.log('onPaintTouchStart');
+	}
+
+	function onPaintTouchMove(e) {
+		console.log('onPainTouchMove');
+	}
+
 	function onSampMouseMove(e) {
 		theApp.mouseX = e.clientX - theApp.theCanvas.offsetLeft;
 		theApp.mouseY = e.clientY - theApp.theCanvas.offsetTop;
@@ -48,9 +78,9 @@ function photograb() {
 
 //		console.log("click: " + theApp.mouseX + "," + theApp.mouseY);   
 		imageData = theApp.context.getImageData(theApp.mouseX,theApp.mouseY,1,1);
-		var red = (imageData.data[0] >> 1) | 0x80;
-		var green = (imageData.data[1] >> 1) | 0x80;
-		var blue = (imageData.data[2] >> 1) | 0x80;
+		var red = imageData.data[0];
+		var green = imageData.data[1];
+		var blue = imageData.data[2];
 		console.log("color (" + red.toString(16) + ", " + green.toString(16) + ", " + blue.toString(16) + ")")
 		currentLight.setlamp(red, green, blue);
 	}
@@ -62,9 +92,9 @@ function photograb() {
 		theApp.mouseY = touch.clientY - theApp.theCanvas.offsetTop;
 		console.log("touch: " + theApp.mouseX + "," + theApp.mouseY);
 		imageData = theApp.context.getImageData(theApp.mouseX,theApp.mouseY,1,1);
-		var red = (imageData.data[0] >> 1) | 0x80;
-		var green = (imageData.data[1] >> 1) | 0x80;
-		var blue = (imageData.data[2] >> 1) | 0x80;
+		var red = imageData.data[0];
+		var green = imageData.data[1];
+		var blue = imageData.data[2];
 		console.log("color (" + red.toString(16) + ", " + green.toString(16) + ", " + blue.toString(16) + ")")
 		currentLight.setlamp(red, green, blue);
 		theApp.lastTouch = new Date().getTime();
@@ -110,12 +140,34 @@ function photograb_imageLoaded() {
 	// Should we maybe resize based on the image size?
 	console.log(photograb_img.width, photograb_img.height);
 
+	// OK let's try a little resizery here
+	// First, figure out which dimension ain't gonna scale.
+	var scale_width = theApp.theCanvas.width / photograb_img.width;
+	var scale_height = theApp.theCanvas.height / photograb_img.height;
+
+	// The smaller of the ratios is the one that should command our attention
+	if (scale_width <= scale_height) {
+
+		var scale = theApp.theCanvas.width / photograb_img.width;
+		photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
+		photograb_img.height = Math.floor(photograb_img.height * scale);
+
+	} else {
+
+		var scale = theApp.theCanvas.height / photograb_img.height;
+		photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
+		photograb_img.height = Math.floor(photograb_img.height * scale);
+
+	}
+
+	console.log(photograb_img.width, photograb_img.height);
+
 	// Need to do something hear to clear the canvas to transparent...
 	theApp.context.fillStyle = "rgba(0, 0, 0, 1)";
 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
 	theApp.context.fillStyle = "rgba(255, 255, 255, 0)";
 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
-	theApp.context.drawImage(photograb_img, 0, 0);
+	theApp.context.drawImage(photograb_img, 0, 0, photograb_img.width, photograb_img.height);
 	
 }
 	
@@ -127,7 +179,7 @@ function handlefiles(tf){
 	photograb_img.classList.add("obj");
 	photograb_img.file = tf[0];
 	$(photograb_img).load(photograb_imageLoaded);
-	console.log("grabbing ", photograb_img.file);
+	//console.log("grabbing ", photograb_img.file);
 	 
 	var reader = new FileReader();
 	reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(photograb_img);
@@ -135,6 +187,7 @@ function handlefiles(tf){
 	while (reader.readyState == false) {
 		var x = 1;
 	}
-	console.log(photograb_img);
+
+	//console.log(photograb_img);
 	return;
 }

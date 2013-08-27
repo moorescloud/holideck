@@ -16,7 +16,14 @@
 	-webkit-border-radius: 4px; 
 }
 
-#photograb .selector {
-    margin: 0 auto;
+#photograb .photo {
+    margin: 1 auto;
+    border: 1px solid #fff; 
+    width: 290px;
+}
+
+#photograb .painter {
+    margin: 1 auto;
+    border: 1px solid #fff; 
     width: 290px;
 }
