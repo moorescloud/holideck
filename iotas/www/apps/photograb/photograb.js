@@ -29,10 +29,6 @@ function photograb() {
 	this.context = this.theCanvas.getContext('2d');
 	console.log("Got context");
 	console.log(screen.width, screen.height);
-	//this.theCanvas.width = screen.width;
-	//this.theCanvas.height = screen.height;
-	//this.context.fillStyle = "#FFFFFF";
-	//this.context.fillRect(0, 0, this.theCanvas.width, this.theCanvas.height);
 	
 	this.theCanvas.addEventListener("mousemove", onSampMouseMove, false);
 	this.theCanvas.addEventListener("click", onSampMouseClick, false);
@@ -41,19 +37,12 @@ function photograb() {
 
 	
 	function onSampMouseMove(e) {
-		//theApp.mouseX = e.clientX - (theApp.theCanvas.offsetLeft + $(theApp.theCanvas).parent().parent()[0].offsetLeft);
-		//theApp.mouseY = e.clientY - (theApp.theCanvas.offsetTop + $(theApp.theCanvas).parent().parent()[0].offsetTop);	      
 		theApp.mouseX = e.clientX - theApp.theCanvas.offsetLeft;
 		theApp.mouseY = e.clientY - theApp.theCanvas.offsetTop;
 
 	}
 	
 	function onSampMouseClick(e) {
-//		console.log("event at: " + e.clientX + "," + e.clientY);
-//		console.log($(theApp.theCanvas).parent().parent()[0].offsetLeft);
-//		console.log("canvas at: " + theApp.theCanvas.offsetLeft + "," + theApp.theCanvas.offsetTop);
-//		theApp.mouseX = e.clientX - (theApp.theCanvas.offsetLeft + $(theApp.theCanvas).parent().parent()[0].offsetLeft);
-//		theApp.mouseY = e.clientY - (theApp.theCanvas.offsetTop + $(theApp.theCanvas).parent().parent()[0].offsetTop);	   
 		theApp.mouseX = e.clientX - theApp.theCanvas.offsetLeft;
 		theApp.mouseY = e.clientY - theApp.theCanvas.offsetTop;
 
@@ -69,8 +58,6 @@ function photograb() {
 	function onSampTouchStart(e) {
 		var touch = e.touches[0];
 		console.log("onTouchStart", touch.clientX, touch.clientY );
-		//theApp.mouseX = touch.clientX - (theApp.theCanvas.offsetLeft + $(theApp.theCanvas).parent().parent()[0].offsetLeft);
-		//theApp.mouseY = touch.clientY - (theApp.theCanvas.offsetTop + $(theApp.theCanvas).parent().parent()[0].offsetTop);
 		theApp.mouseX = touch.clientX - theApp.theCanvas.offsetLeft;
 		theApp.mouseY = touch.clientY - theApp.theCanvas.offsetTop;
 		console.log("touch: " + theApp.mouseX + "," + theApp.mouseY);

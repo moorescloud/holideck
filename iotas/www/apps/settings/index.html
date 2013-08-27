@@ -26,25 +26,7 @@
 	
 		<script>
 			
-			// Start the App
-			function startApp() {
-				console.log("function startApp");
-				theApp = new settings(); // Instance an App
-				theApp.appStart(); // Start the App
-			}
-			
-			// Stop the App
-			function stopApp() {
-				console.log("function stopApp");
-				theApp.appQuit();
-				$( document ).undelegate("#settings", "pageinit", startApp);
-				$( document ).undelegate("#settings", "pagebeforehide", stopApp );
-			}
-	
-			console.log("Location #settings");
-			
-			$( document ).delegate("#settings", "pageinit", startApp);
-			$( document ).delegate("#settings", "pagebeforehide", stopApp);
+			// Nothing to do here, yet.
 	
 		</script>
 
@@ -59,21 +41,12 @@
 		
 		<section data-role="content">
 			
-			<div class="wifi-config">
-				
-				<h3>Choose Network</h3>
-				
-				<div id="network_list">
+			<a href="name/index.html" class="network" data-role="button">Device Name</a>
+			<a href="wifi/index.html" class="network" data-role="button">WiFi configuration</a>
+			<a href="moorescloud/index.html" class="network" data-role="button">The MooresCloud</a>
+			<a href="updates/index.html" class="network" data-role="button">Check for updates</a>
+			<a href="developer/index.html" class="network" data-role="button">Developer</a>
 
-					<!--
-					<a href="#password" class="network" data-role="button" data-icon="check" data-rel="popup">My Home Network</a>
-					<a href="#password" class="network" data-role="button" data-icon="check" data-rel="popup">BigPond987654</a>
-					<a href="#password" class="network active" data-role="button" data-icon="check" data-rel="popup">War Driving</a>
-					-->
-
-				</div>
-				
-			</div>
 			
 		</section>
 
