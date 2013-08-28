@@ -188,15 +188,18 @@ function photograb() {
 		var theGlobe = Math.floor(theApp.mouseX / i)
 		//console.log(theApp.mouseX, i, Math.floor(theApp.mouseX / i));
 
+		var currTouch = new Date().getTime();
+
 		// Put the current colour into the globe, then referesherate everything.
 		if (theGlobe >= 0 && theGlobe < 50) {
-			currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+			if ((currTouch - theApp.lastTouch) > 50 ) {	// Max 20hz refresh rate
+				currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+				theApp.lastTouch = currTouch;
+			}
 		}
 
 		theApp.drawPaintArea();
 		currentLight.fastlights();
-
-		theApp.lastTouch = new Date().getTime();
 
 	}
 
