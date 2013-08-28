@@ -156,7 +156,9 @@ function photograb() {
 		//console.log(theApp.mouseX, i, Math.floor(theApp.mouseX / i));
 
 		// Put the current colour into the globe, then referesherate everything.
-		currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+		if (theGlobe >= 0 && theGlobe < 50) {
+			currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+		}
 
 		theApp.drawPaintArea();
 		currentLight.fastlights();
@@ -184,7 +186,9 @@ function photograb() {
 		//console.log(theApp.mouseX, i, Math.floor(theApp.mouseX / i));
 
 		// Put the current colour into the globe, then referesherate everything.
-		currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+		if (theGlobe >= 0 && theGlobe < 50) {
+			currentLight.fastset(theApp.theRed, theApp.theGreen, theApp.theBlue, theGlobe);
+		}
 
 		theApp.drawPaintArea();
 		currentLight.fastlights();
@@ -226,6 +230,7 @@ function photograb() {
 	}
 
 	function onSampTouchStart(e) {
+		event.preventDefault();
 		var touch = e.touches[0];
 		console.log("onTouchStart", touch.clientX, touch.clientY );
 		theApp.mouseX = touch.clientX - theApp.theCanvas.offsetLeft;
@@ -278,6 +283,7 @@ function photograb_imageLoaded() {
 	console.log("imageLoaded");
 
 	// Should we maybe resize based on the image size?
+	//console.log(photograb_img);
 	console.log(photograb_img.width, photograb_img.height);
 
 	// OK let's try a little resizery here
@@ -288,9 +294,9 @@ function photograb_imageLoaded() {
 	// The smaller of the ratios is the one that should command our attention
 	if (scale_width <= scale_height) {*/
 
-		var scale = theApp.theCanvas.width / photograb_img.width;
-		photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
-		photograb_img.height = Math.floor(photograb_img.height * scale);
+		//var scale = theApp.theCanvas.width / photograb_img.width;
+		//photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
+		//photograb_img.height = Math.floor(photograb_img.height * scale);
 
 	/*} else {
 
@@ -307,17 +313,20 @@ function photograb_imageLoaded() {
 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
 	theApp.context.fillStyle = "rgba(255, 255, 255, 0)";
 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
-	theApp.context.drawImage(photograb_img, 0, 0, photograb_img.width, photograb_img.height);
+	//theApp.context.drawImage(photograb_img, 0, 0, 290, 290);
+	theApp.context.drawImage(photograb_img, 0, 0, photograb_img.width, photograb_img.height,
+		0, 0, theApp.theCanvas.width, theApp.theCanvas.height);
+
 
 	theApp.drawPaintArea();
 	
 }
 	
-function handlefiles(tf){
+/*function handlefiles(tf){
 	console.log("handlefiles got ", tf.length, " files");	
 
 	photograb_img = new Image();
-	photograb_img.name = "thingy";
+	photograb_img.name = "a_photo";
 	photograb_img.classList.add("obj");
 	photograb_img.file = tf[0];
 	$(photograb_img).load(photograb_imageLoaded);
@@ -331,5 +340,17 @@ function handlefiles(tf){
 	}
 
 	//console.log(photograb_img);
+	return;
+}*/
+
+function handlefiles(tf){
+	console.log("handlefiles got ", tf.length, " files");	
+
+	var file = tf[0];
+	var mpImg = new MegaPixImage(file);
+
+	var resCanvas1 = document.getElementById('canvas');
+	mpImg.render(resCanvas1, { maxWidth: 290, maxHeight: 290 });
+
 	return;
 }
