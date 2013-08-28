@@ -11,6 +11,7 @@ function photograb() {
 
 	function appStart() {
 		console.log("photograb.appStart");
+		$('head').append('<link rel="stylesheet" href="photograb.css" />');		// Muy importante!
 		sampApp();
 	}
 	
@@ -219,7 +220,7 @@ function photograb() {
 		theApp.mouseX = e.clientX - theApp.theCanvas.offsetLeft;
 		theApp.mouseY = e.clientY - theApp.theCanvas.offsetTop;
 
-//		console.log("click: " + theApp.mouseX + "," + theApp.mouseY);   
+		console.log("click: " + theApp.mouseX + "," + theApp.mouseY);   
 		imageData = theApp.context.getImageData(theApp.mouseX,theApp.mouseY,1,1);
 		var red = theApp.theRed = imageData.data[0];
 		var green = theApp.theGreen = imageData.data[1];
@@ -278,49 +279,49 @@ function photograb() {
 
 }
 
-function photograb_imageLoaded() {
+// function photograb_imageLoaded() {
 
-	console.log("imageLoaded");
+// 	console.log("imageLoaded");
 
-	// Should we maybe resize based on the image size?
-	//console.log(photograb_img);
-	console.log(photograb_img.width, photograb_img.height);
+// 	// Should we maybe resize based on the image size?
+// 	//console.log(photograb_img);
+// 	console.log(photograb_img.width, photograb_img.height);
 
-	// OK let's try a little resizery here
-	// First, figure out which dimension ain't gonna scale.
-	/*var scale_width = theApp.theCanvas.width / photograb_img.width;
-	var scale_height = theApp.theCanvas.height / photograb_img.height;
+// 	// OK let's try a little resizery here
+// 	// First, figure out which dimension ain't gonna scale.
+// 	/*var scale_width = theApp.theCanvas.width / photograb_img.width;
+// 	var scale_height = theApp.theCanvas.height / photograb_img.height;
 
-	// The smaller of the ratios is the one that should command our attention
-	if (scale_width <= scale_height) {*/
+// 	// The smaller of the ratios is the one that should command our attention
+// 	if (scale_width <= scale_height) {*/
 
-		//var scale = theApp.theCanvas.width / photograb_img.width;
-		//photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
-		//photograb_img.height = Math.floor(photograb_img.height * scale);
+// 		//var scale = theApp.theCanvas.width / photograb_img.width;
+// 		//photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
+// 		//photograb_img.height = Math.floor(photograb_img.height * scale);
 
-	/*} else {
+// 	} else {
 
-		var scale = theApp.theCanvas.height / photograb_img.height;
-		photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
-		photograb_img.height = Math.floor(photograb_img.height * scale);
+// 		var scale = theApp.theCanvas.height / photograb_img.height;
+// 		photograb_img.setAttribute('width', Math.floor(photograb_img.width * scale));
+// 		photograb_img.height = Math.floor(photograb_img.height * scale);
 
-	}*/
+// 	}
 
-	console.log(photograb_img.width, photograb_img.height);
+// 	console.log(photograb_img.width, photograb_img.height);
 
-	// Need to do something hear to clear the canvas to transparent...
-	theApp.context.fillStyle = "rgba(0, 0, 0, 1)";
-	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
-	theApp.context.fillStyle = "rgba(255, 255, 255, 0)";
-	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
-	//theApp.context.drawImage(photograb_img, 0, 0, 290, 290);
-	theApp.context.drawImage(photograb_img, 0, 0, photograb_img.width, photograb_img.height,
-		0, 0, theApp.theCanvas.width, theApp.theCanvas.height);
+// 	// Need to do something hear to clear the canvas to transparent...
+// 	theApp.context.fillStyle = "rgba(0, 0, 0, 1)";
+// 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
+// 	theApp.context.fillStyle = "rgba(255, 255, 255, 0)";
+// 	theApp.context.fillRect(0, 0, theApp.theCanvas.width, theApp.theCanvas.width);
+// 	//theApp.context.drawImage(photograb_img, 0, 0, 290, 290);
+// 	theApp.context.drawImage(photograb_img, 0, 0, photograb_img.width, photograb_img.height,
+// 		0, 0, theApp.theCanvas.width, theApp.theCanvas.height);
 
 
-	theApp.drawPaintArea();
+// 	theApp.drawPaintArea();
 	
-}
+// }
 	
 /*function handlefiles(tf){
 	console.log("handlefiles got ", tf.length, " files");	
@@ -350,7 +351,9 @@ function handlefiles(tf){
 	var mpImg = new MegaPixImage(file);
 
 	var resCanvas1 = document.getElementById('canvas');
-	mpImg.render(resCanvas1, { maxWidth: 290, maxHeight: 290 });
+	console.log("dimensions: ", theApp.theCanvas.width, theApp.theCanvas.height)
+	mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
+	theApp.drawPaintArea();
 
 	return;
 }
