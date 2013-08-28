@@ -55,6 +55,8 @@ function nrl() {
 
 	function appStart() {
 		console.log("nrl.appStart");
+		$('head').append('<meta name="viewport" content="width=device-width, initial-scale=1">');
+		$('head').append('<meta name="apple-mobile-web-app-capable" content="yes" />');
 		$("head").append('<link rel="stylesheet" href="nrl.css" />');
 	}
 	
