@@ -43,7 +43,11 @@ except ImportError:
 
 #docroot = '/home/mpesce/iotas'
 #docroot = os.path.join(os.getcwd(), 'iotas') 		# Hopefully we startup in this directory
-docroot = os.getcwd()
+if SIM_STATE == False:
+	docroot = os.getcwd()				# Bare startup directory
+else:
+	docroot = os.path.join(os.getcwd(), 'iotas') 	# Holideck startup in this directory
+
 print "Startup directory %s" % docroot
 default_name = 'index.html'
 
@@ -355,7 +359,7 @@ def old_run(port):
 				print("Port %s not available, trying another" % socknum)
 				socknum += 1
 
-def older_run(port, queue):
+def run(port, queue):
 	"""invoke run when loading as a module in the simulator"""
 	# Instance the devices that we're going to control
 	# Add each to the control ring. For no very good reason.
