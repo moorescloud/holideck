@@ -340,12 +340,15 @@ class Holiday:
 		else:
 			echo = ""
 			ln = 0
+			slist = []
 			while (ln < self.numleds):
 				tripval = (self.leds[ln][0] * 65536) + (self.leds[ln][1] * 256) + self.leds[ln][2]
 				#echo = echo + "%6X" % tripval + "\\" + "\\" + "x0a"  # magic pixie formatting eh?
-				echo = echo + "%06X\n" % tripval
+				#echo = echo + "%06X\n" % tripval
+				slist.append("%06X\n" % tripval)
 				ln = ln+1
 			#print echo
+			echo = ''.join(slist)	# Meant to be very much faster
 			if self.isSim == True:
 				self.queue.put(echo, block=False)
 			else:
