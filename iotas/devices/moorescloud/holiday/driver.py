@@ -20,44 +20,47 @@ from multiprocessing import Queue
 from bottle import request
 
 class Holiday:
-	def old__init__(self, remote=False, address='sim', name='nameless'):
-		self.numleds = 50
-		self.leds = []			# Array of LED values. This may actually exist elsewhere eventually.
-		self.address = ''
-		self.name = name
-
-		if remote == False:
-			self.remote = False
-			if address == 'sim':
-				self.pipename = os.path.join(os.path.expanduser('~'), 'pipelights.fifo')
-				self.address = address
-			else:
-				self.pipename = "/run/pipelights.fifo"
-				self.address = address
-			try:
-				self.pipe = open(self.pipename,"wb")
-			except:
-				print "Couldn't open the pipe, there's gonna be trouble!"
-			ln = 0
-		else:
-			self.address = address
-			self.remote = True
-
-		for ln in range(self.numleds):
-			self.leds.append([0x00, 0x00, 0x00])	# Create and clear an array of RGB LED values
-
-		return
+# 	def old__init__(self, remote=False, address='sim', name='nameless'):
+# 		self.numleds = 50
+# 		self.leds = []			# Array of LED values. This may actually exist elsewhere eventually.
+# 		self.address = ''
+# 		self.name = name
+# 		self.isSim = False
+# 
+# 		if remote == False:
+# 			self.remote = False
+# 			if address == 'sim':
+# 				self.pipename = os.path.join(os.path.expanduser('~'), 'pipelights.fifo')
+# 				self.address = address
+# 			else:
+# 				self.pipename = "/run/pipelights.fifo"
+# 				self.address = address
+# 			try:
+# 				self.pipe = open(self.pipename,"wb")
+# 			except:
+# 				print "Couldn't open the pipe, there's gonna be trouble!"
+# 			ln = 0
+# 		else:
+# 			self.address = address
+# 			self.remote = True
+# 
+# 		for ln in range(self.numleds):
+# 			self.leds.append([0x00, 0x00, 0x00])	# Create and clear an array of RGB LED values
+# 
+# 		return
 
 	def __init__(self, remote=False, address='sim', name='nameless', queue=None):
 		self.numleds = 50
 		self.leds = []			# Array of LED values. This may actually exist elsewhere eventually.
 		self.address = ''
 		self.name = name
+		self.isSim = False
 
 		if remote == False:
 			self.remote = False
 			if address == 'sim':
 				self.queue = queue
+				self.isSim = True
 				#print "IoTAS Queue at %s" % (self.queue,)
 			else:
 				self.pipename = "/run/pipelights.fifo"
@@ -343,7 +346,11 @@ class Holiday:
 				echo = echo + "%06X\n" % tripval
 				ln = ln+1
 			#print echo
-			self.queue.put(echo, block=False)
+			if self.isSim == True:
+				self.queue.put(echo, block=False)
+			else:
+				self.pipe.write(echo)
+				self.pipe.flush()
 		return
 		
 	def on(self):

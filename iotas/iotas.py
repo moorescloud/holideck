@@ -17,6 +17,17 @@ import json, socket, os, sys
 import drawlight, setlights
 from bottle import Bottle, run, static_file, post, request
 
+# On the command line we can tell iotas to go into real mode possibly
+# invoke as python iotas.py nosim to avoid simulation mode -- which holideck won't
+#
+if len(sys.argv) == 1:
+	SIM_STATE = True
+else:
+	if sys.argv[1] == 'nosim':
+		SIM_STATE = False
+	else:
+		SIM_STATE = True
+
 app = Bottle()
 app.devices = []
 app.licht = 0
@@ -31,7 +42,8 @@ except ImportError:
 	print "No SWIFT capabilities"
 
 #docroot = '/home/mpesce/iotas'
-docroot = os.path.join(os.getcwd(), 'iotas') 		# Hopefully we startup in this directory
+#docroot = os.path.join(os.getcwd(), 'iotas') 		# Hopefully we startup in this directory
+docroot = os.getcwd()
 print "Startup directory %s" % docroot
 default_name = 'index.html'
 
@@ -253,7 +265,32 @@ def afl():
 	# Pass that along to wherever it needs to go
 	resp = app.licht.afl(dj)
 	return json.dumps(resp)
-    
+
+def new_run():
+	""" This is the real run method, we hope"""
+	# Instance the devices that we're going to control
+	# Add each to the control ring. For no very good reason.
+	#
+	ourname = "%s.local" % socket.gethostname()
+	import devices.moorescloud.holiday.driver as driver
+	app.licht = driver.Holiday(remote=False, address='localhost', name=ourname)	# Connect to a real device
+	app.licht.create_routes(app)										# Adds in all the routes for device
+
+	#the_srv = 'wsgiref'  
+	the_srv = 'cherrypy'
+	#print app.licht
+
+	print 'Routes'
+	for rt in app.routes:
+		print rt.method, rt.rule, rt.callback
+	
+	print "Running..."
+	# Try to run on port 80, if that fails, go to 8080
+	try:
+		app.run(host='0.0.0.0', port=80, debug=True, server=the_srv)
+	except socket.error as msg:
+		print "Couldn't get port, you need to run in superuser!"
+		sys.exit(1)
 
 def old_run(port):
 	"""invoke run when loading as a module in the simulator"""
@@ -318,7 +355,7 @@ def old_run(port):
 				print("Port %s not available, trying another" % socknum)
 				socknum += 1
 
-def run(port, queue):
+def older_run(port, queue):
 	"""invoke run when loading as a module in the simulator"""
 	# Instance the devices that we're going to control
 	# Add each to the control ring. For no very good reason.
@@ -328,7 +365,7 @@ def run(port, queue):
 	lichtapiname = 'sim'		
 
 	import devices.moorescloud.holiday.driver as driver
-	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
+	app.licht = driver.Holiday(remote=False, address='sim', name='a_holiday', queue=queue)
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#for rt in app.routes:
@@ -349,4 +386,8 @@ def run(port, queue):
 			socknum += 1
 
 if __name__ == '__main__':
-	old_run(port=8080)
+	if SIM_STATE == True:
+		old_run(port=8080)
+	else:
+		new_run()
+
