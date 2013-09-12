@@ -17,7 +17,7 @@ import subprocess, time, os
 import requests 
 import json
 from multiprocessing import Queue 
-from bottle import request
+from bottle import request, abort
 
 class Holiday:
 # 	def old__init__(self, remote=False, address='sim', name='nameless'):
@@ -95,6 +95,36 @@ class Holiday:
 		There is a URL schema for IoTAS.  You should follow its guidelines."""
 
 		routebase = """/iotas/0.1/device/moorescloud.holiday/%s/""" % self.name
+
+		@theapp.get(routebase + 'hostname')
+		def get_hostname():
+			"""Return the hostname as nicely formatted JSON"""
+			import socket
+			n = { "hostname": socket.gethostname() }
+			return json.dumps(n)
+
+		@theapp.put(routebase + 'hostname')
+		def set_hostname():
+			"""Sets the hostname for the device, 
+			triggers a script in /home/holiday/util to do the work"""
+			d = request.body.read()
+			print "Received %s" % d
+			try:
+				dj = json.loads(d)
+			except:
+				print "Bad JSON data, aborting"
+				abort(400, "Bad JSON")
+				return
+
+			if 'hostname' in dj:
+				try:
+					c = subprocess.check_output(['/home/holiday/util/set_hostname.sh', dj['hostname']])
+				except subprocess.CalledProcessError:
+					abort(500, "Hostname change failed")
+			else:
+				abort(400, "No hostname provided")
+				return
+			return
 
 		@theapp.get(routebase)
 		def get_holidays():

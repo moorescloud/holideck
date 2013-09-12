@@ -138,29 +138,29 @@ def set_light_values():
 	d = request.body.read()
 	if len(d) == 0:
 		return json.dumps({"value": False})
-	print "Received %s" % d
+	#print "Received %s" % d
 	try:
 		dj = json.loads(d)
 	except:
 		print "Bad JSON data, aborting..."
 		return json.dumps({"value": False})
 	if 'value' in dj:
-		print "there is a value"
+		#print "there is a value"
 		triplet = dj['value']
 	else:
 		return json.dumps({"value": False})
 			
-	print "set_light_values %s" % triplet
+	#print "set_light_values %s" % triplet
 	retval = app.licht.set_light_values(triplet)
 	return json.dumps(retval)
 
 @app.put('/device/light/setlights')
 def do_setlights():
 	d = request.body.read()
-	print "Received %s" % d
+	#print "Received %s" % d
 	try:
 		dj = json.loads(d)
-		print len(dj['lights'])
+		#print len(dj['lights'])
 	except:
 		print "Bad JSON data, aborting..."
 		return json.dumps({"value": False})
@@ -277,7 +277,7 @@ def new_run():
 	#
 	ourname = "%s.local" % socket.gethostname()
 	import devices.moorescloud.holiday.driver as driver
-	app.licht = driver.Holiday(remote=False, address='localhost', name=ourname)	# Connect to a real device
+	app.licht = driver.Holiday(remote=False, address='localhost', name='localhost')	# Connect to a real, local device
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#the_srv = 'wsgiref'  
