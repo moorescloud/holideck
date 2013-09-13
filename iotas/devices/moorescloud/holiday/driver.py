@@ -55,6 +55,8 @@ class Holiday:
 		self.address = ''
 		self.name = name
 		self.isSim = False
+		self.inDevMode = False
+		self.device_type = 'moorescloud.holiday'
 
 		if remote == False:
 			self.remote = False
@@ -105,7 +107,7 @@ class Holiday:
 
 		@theapp.put(routebase + 'hostname')
 		def set_hostname():
-			"""Sets the hostname for the device, 
+			"""Sets the hostname for the device, given a nicely formatted JSON request 
 			triggers a script in /home/holiday/util to do the work"""
 			d = request.body.read()
 			print "Received %s" % d
@@ -125,6 +127,48 @@ class Holiday:
 				abort(400, "No hostname provided")
 				return
 			return
+
+		@theapp.get(routebase + 'devmode')
+		def get_devmode():
+			""" Return a boolean indicating whether the Holiday is in developer mode or not"""
+			if self.isSim == True:
+				the_response = { "devmode": self.inDevMode }
+			else:
+				try:
+					c = subprocess.check_output(['/home/holiday/util/get_devmode.sh'])
+					the_response = { "devmode": c }
+				except subprocess.CalledProcessError:
+					abort(500, "Developer mode query failed")
+					return
+			return json.dumps(the_response)
+
+		@theapp.put(routebase + 'devmode')
+		def set_devmode():
+			""" Sets developer mode to the state passed in the nicely formatted JSON """
+			d = request.body.read()
+			print "Received %s" % d
+			try:
+				dj = json.loads(d)
+			except:
+				print "Bad JSON data, aborting"
+				abort(400, "Bad JSON")
+				return
+			if 'devmode' in dj:
+				devbool = dj['devmode']
+			else:
+				print "No devmode found, aborting"
+				abort(400, "No devmode specified")
+				return
+
+			if self.isSim == True:
+				self.inDevMode = devbool
+			else:
+				try:
+					c = subprocess.check_output(['/home/holiday/util/set_devmode.sh', str(devbool)])
+				except subprocess.CalledProcessError:
+					abort(500, "Developer mode set failed")
+					return
+			return			
 
 		@theapp.get(routebase)
 		def get_holidays():

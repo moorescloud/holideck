@@ -107,7 +107,7 @@ def do_iotas_info():
 	# end = html.find("</body>")
 	# start = html.find("Address:") + 9
 	# external_ip = html[start:end].strip() 
-	resp = { "version": "0.1a", "apis": [], "host_name": hostname, "ip": external_ip }
+	resp = { "version": "0.1a", "apis": [], "host_name": hostname, "ip": external_ip, "local_device": app.licht.device_type, "local_name": app.licht.name }
 	return json.dumps(resp)
 
 @app.get('/devices')
@@ -119,7 +119,7 @@ def do_devices():
 	devs = app.licht.get_devices()
 	for devi in app.devices:
 		devs.append(app.licht.get_info())
-	resp = { "block": "EngineRoom by MooresCloud", "devices": devs, "name": thename }
+	resp = { "block": "Holiday by MooresCloud", "devices": devs, "name": thename }
 	return json.dumps(resp)
 
 # THESE API CALLS ARE DEPRECATED
@@ -338,9 +338,9 @@ def old_run(port):
 	the_srv = 'cherrypy'
 	#print app.licht
 
-	#print 'Routes'
-	#for rt in app.routes:
-	#	print rt.method, rt.rule, rt.callback
+	print 'Routes'
+	for rt in app.routes:
+		print rt.method, rt.rule, rt.callback
 	
 	print "Running..."
 	# Try to run on port 80, if that fails, go to 8080
@@ -369,7 +369,7 @@ def run(port, queue):
 	lichtapiname = 'sim'		
 
 	import devices.moorescloud.holiday.driver as driver
-	app.licht = driver.Holiday(remote=False, address='sim', name='a_holiday', queue=queue)
+	app.licht = driver.Holiday(remote=False, address='sim', name='sim', queue=queue)
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#for rt in app.routes:

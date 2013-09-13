@@ -20,6 +20,10 @@ function Holiday(address) {
 	this.gradient = gradient;
 	this.sendcmd = sendcmd;
 	this.sendcmdparam = sendcmdparam;
+	this.gethostname = gethostname;
+	this.sethostname = sethostname;
+	this.getdevmode = getdevmode;
+	this.setdevmode = setdevmode;
 
  	this.fastlights = fastlights;
 	var fastbulbs = [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000,
@@ -162,6 +166,119 @@ function Holiday(address) {
 		});		
 	}
 
+	// Here are Holiday device-specific functions relating to MooresCloud OS
+	function gethostname() {
+		// Make an IoTAS call to return the state of device's hostname mode
+		// Use that result to flip the switch so it's reflective of the device state.
+		console.log('holiday.gethostname');
+		var rest_url = iotasrv.device_url +  'hostname';
+
+
+		$.ajax({
+			type: "GET",
+			async: false,
+			url: rest_url, 
+			success: function(data, status, settings) 
+			{ 
+				dj = JSON.parse(data); 
+				theApp.thehostname = dj.hostname;
+				console.log("Received hostname " + theApp.thehostname);
+
+				// Now set the value of the field to that.
+				$('#hostnametext').val(theApp.thehostname);
+			},
+			error: function() 
+			{
+				console.log("gethostname did not end well.");
+			}
+		});
+	}
+	
+	function sethostname(theName)
+	{
+		console.log('holiday.sethostname');
+		console.log("Will be setting hostname to " + theName);
+		var payload = new Object();
+		payload.hostname = theName;
+		console.log(payload);
+		var rest_url = iotasrv.device_url +  'hostname';
+
+
+		$.ajax({
+			type: "PUT",
+			async: false,
+			url: rest_url, 
+			data: JSON.stringify(payload),
+			success: function() 
+			{ 
+				console.log("Device name successfully changed to " + theName);
+			},
+			error: function() 
+			{
+				console.log("sethostname did not end well.");
+				// We should throw up an error dialog here.
+			}
+		});
+		return;
+	}
+
+	function getdevmode(doWhenDone) {
+		// Make an IoTAS call to return the state of device's developer mode
+		// Use that result to flip the switch so it's reflective of the device state.
+		// It returns the value of dev mode, a boolean.
+		//
+		console.log('holiday.getdevmode');
+		var rest_url = iotasrv.device_url +  'devmode';
+		console.log(rest_url);
+		$.ajax({
+			type: "GET",
+			async: false,
+			url: rest_url,
+			success: function(data, status, settings) 
+			{ 
+				var dj = JSON.parse(data); 
+				if (dj.devmode == false) {
+					console.log("devmode is off")
+				} else {
+					console.log("devmode is on")
+				}
+				doWhenDone(dj.devmode);
+			},
+			error: function() 
+			{
+				console.log("getdevmode did not end well.");
+				// Throw up an error dialog?
+			}
+		});
+	}
+
+	function setdevmode(newMode) {
+		console.log('holiday.setdevmode');
+		console.log(newMode);
+		var payload = new Object();
+		payload.devmode = newMode;
+		console.log(payload);
+		var rest_url = iotasrv.device_url +  'devmode';
+
+		$.ajax({
+			type: "PUT",
+			async: false,
+			url: rest_url,
+			data: JSON.stringify(payload),
+			success: function() 
+			{ 
+				console.log("Developer mode successfully changed");
+				return true;
+			},
+			error: function() 
+			{
+				console.log("setdevmode did not end well.");
+				return false;
+				// We should throw up an error dialog here.
+			}
+		});
+		return;
+	}
 
 	// Legacy, ignored
 	//

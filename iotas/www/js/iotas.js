@@ -32,14 +32,19 @@ function iotas(address) {
 	function get_status() {
 		$.ajax({
 			type: "GET",
-			url: this.urlbase + 'iotas', 
+			async: false,
+			url: iotasrv.urlbase + 'iotas', 
 			success: function(data) {
 				jd = JSON.parse(data)
 				console.log(jd);
-				this.ip_addr = jd.ip;
-				this.vers = jd.version;
-				this.hostnm = jd.hostname;
-				this.apis = jd.apis;
+				iotasrv.ip_addr = jd.ip;
+				iotasrv.vers = jd.version;
+				iotasrv.hostnm = jd.hostname;
+				iotasrv.apis = jd.apis;
+				iotasrv.local_device = jd.local_device;
+				iotasrv.local_name = jd.local_name;
+				iotasrv.device_url = iotasrv.urlbase + 'iotas/0.1/device/' + jd.local_device + '/' + jd.local_name + '/';
+				console.log("iotas.device_url is " + iotasrv.device_url);
 			}
 		});
 	}

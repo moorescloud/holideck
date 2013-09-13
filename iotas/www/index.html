@@ -25,8 +25,11 @@
 		// Put the main script stuff in it
 		var addr = document.URL.slice(7,-1);
 		console.log(addr);
-		//var iotasrv = new iotas(document.URL);
-		//iotasrv.get_status();
+
+		// Setup IoTAS
+		console.log('instancing iotas')
+		var iotasrv = new iotas(document.URL);
+		iotasrv.get_status();
 
 		// Specifically for the simulator we grab the URL out of the browser
 		// This is what we use to communicate with the simulator.
