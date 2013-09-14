@@ -51,6 +51,12 @@
 			console.log("pageinit listener attached");
 	
 			$( document ).delegate("#afl", "pagebeforehide", stop_app);
+
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#afl' ).on("pagehide", function(event, ui) {
+				console.log('afl.remove');
+				$('#afl').remove();			// Dump the page from memory
+			});
 	
 		</script>
 

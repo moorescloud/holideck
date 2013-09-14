@@ -45,6 +45,12 @@
 			
 			$( document ).delegate("#api-demo", "pageinit", start_app);
 			$( document ).delegate("#api-demo", "pagebeforehide", stop_app);
+
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#api-demo' ).on("pagehide", function(event, ui) {
+				console.log('api-demo.remove');
+				$('#api-demo').remove();			// Dump the page from memory
+			});
 	
 		</script>
 

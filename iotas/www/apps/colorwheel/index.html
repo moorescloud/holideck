@@ -43,7 +43,13 @@
 	
 			$( document ).delegate("#colorwheel", "pageinit", start_app);
 			$( document ).delegate("#colorwheel", "pagebeforehide", stop_app);
-	
+
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#colorwheel' ).on("pagehide", function(event, ui) {
+				console.log('colorwheel.remove');
+				$('#colorwheel').remove();			// Dump the page from memory
+			});
+
 		</script>
 
 		

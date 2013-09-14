@@ -64,6 +64,12 @@
             $( document ).delegate("#countdown", "pageinit", start_app);
             $( document ).delegate("#countdown", "pagebeforehide", stop_app);
     
+            // Must add this little bit of stuff to every app so it correctly clears itself from the cache
+            $( '#countdown' ).on("pagehide", function(event, ui) {
+                console.log('countdown.remove');
+                $('#countdown').remove();          // Dump the page from memory
+            });
+
         </script>
 
         

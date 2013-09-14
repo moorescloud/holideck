@@ -26,7 +26,11 @@
 	
 		<script>
 			
-			// Nothing to do here, yet.
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#settings' ).on("pagehide", function(event, ui) {
+				console.log('settings.remove');
+				$('#settings').remove();			// Dump the page from memory
+			});
 	
 		</script>
 

@@ -47,6 +47,12 @@
 			
 			$( document ).delegate("#timer", "pageinit", start_app);
 			$( document ).delegate("#timer", "pageremove", stop_app);
+
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#timer' ).on("pagehide", function(event, ui) {
+				console.log('timer.remove');
+				$('#timer').remove();			// Dump the page from memory
+			});
 	
 		</script>
 
