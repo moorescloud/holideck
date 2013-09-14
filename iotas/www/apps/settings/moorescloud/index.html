@@ -45,6 +45,12 @@
 			
 			$( document ).delegate("#moorescloud", "pageinit", start_app);
 			$( document ).delegate("#moorescloud", "pagebeforehide", stop_app);
+
+						// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#moorescloud' ).on("pagehide", function(event, ui) {
+				console.log('moorescloud.remove');
+				$('#moorescloud').remove();			// Dump the page from memory
+			});
 	
 		</script>
 
