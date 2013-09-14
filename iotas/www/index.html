@@ -22,6 +22,10 @@
 
 	<script>
 		
+		// This should prevent failures if the console isn't available
+		// From http://stackoverflow.com/questions/690251/what-happened-to-console-log-in-ie8
+		var console=console||{"log":function(){}};
+
 		// Put the main script stuff in it
 		var addr = document.URL.slice(7,-1);
 		console.log(addr);
