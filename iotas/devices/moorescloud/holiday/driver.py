@@ -136,10 +136,9 @@ class Holiday:
 			else:
 				try:
 					c = subprocess.check_output(['/home/holiday/util/get_devmode.sh'])
-					the_response = { "devmode": c }
+					the_response = { "devmode": True }
 				except subprocess.CalledProcessError:
-					abort(500, "Developer mode query failed")
-					return
+					the_response = { "devmode": False }
 			return json.dumps(the_response)
 
 		@theapp.put(routebase + 'devmode')
