@@ -1,0 +1,19 @@
+/* Settings App */
+
+#settings {
+	background: #555 url(background-linen.png) repeat 50% 0%;
+	-webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
+  background-size: auto;
+}
+
+.network {
+	text-align: left;
+}
+
+.password {
+	padding: 20px;
+}
+
+

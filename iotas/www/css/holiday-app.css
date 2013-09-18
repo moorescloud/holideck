@@ -1,6 +1,7 @@
 /* 
 	MooresCloud 
 	@file: holiday-app.css
+	@see: jquery.mobile.x-x-x.css
 	
 */
 
@@ -111,8 +112,21 @@ img {
 
 /* jQueryMobile */
 
-.ui-content {
-/* 	padding: 0 20px; */
+html {
+	background: #000;
+}
+
+.ui-body-c, 
+.ui-overlay-c {
+	background: #000;
+}
+
+@media only screen and (min-width: 768px){
+	.ui-page {
+	  width: 768px !important;
+	  margin: 0 auto !important;
+	  position: relative !important;
+	}
 }
 
 /* Title Bar */
@@ -133,47 +147,6 @@ img {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-/* Config */
-
-#config {
-	background: #555 url(../assets/background-linen.png) repeat 50% 0%;
-	-webkit-background-size: auto;
-  -moz-background-size: auto;
-  -o-background-size: auto;
-  background-size: auto;
-}
-
-/* Config Panel */
-.ui-panel-inner {
-	padding: 0 15px;
-}
-
-/* Config Forms */
-
-div.ui-input-text,
-input.ui-input-text.ui-slider-input {
-	background: #000;
-	background: rgba(0, 0, 0, .3);
-}
-
-label.ui-input-text {
-	color: #fff;
-	font-size: 12px;
-	text-shadow: none;
-}
-
-input.ui-input-text, 
-textarea.ui-input-text {
-	color: #fff;
-	font-size: 12px;
-	text-shadow: none;
-}
-
-hr {
-	border-color: #000;
-	border-color: rgba(0, 0, 0, .3);
 }
 
 /* Settings App */

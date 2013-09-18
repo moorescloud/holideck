@@ -18,3 +18,16 @@
 	position: absolute;
 	bottom: 20px;
 }
+
+#timer label.ui-input-text {
+	color: #fff;
+	font-size: 12px;
+	text-shadow: none;
+}
+
+#timer input.ui-input-text, 
+#timer textarea.ui-input-text {
+	color: #fff;
+	font-size: 12px;
+	text-shadow: none;
+}
