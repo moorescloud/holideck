@@ -284,9 +284,9 @@ def new_run():
 	the_srv = 'cherrypy'
 	#print app.licht
 
-	print 'Routes'
-	for rt in app.routes:
-		print rt.method, rt.rule, rt.callback
+	#print 'Routes'
+	#for rt in app.routes:
+	#	print rt.method, rt.rule, rt.callback
 	
 	print "Running..."
 	# Try to run on port 80, if that fails, go to 8080

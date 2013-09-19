@@ -58,14 +58,26 @@ class Holiday:
 		self.inDevMode = False
 		self.device_type = 'moorescloud.holiday'
 
+		# Using the new compositor 'compose' if True
+		self.compose = True 		
+		if (self.compose == True):
+			self.pid = os.getpid()			# Must pass PID to compose
+		else:
+			self.pid = None
+
 		if remote == False:
 			self.remote = False
 			if address == 'sim':
 				self.queue = queue
 				self.isSim = True
+				self.compose = False		# If simulator, we're not using the new compose
 				#print "IoTAS Queue at %s" % (self.queue,)
 			else:
-				self.pipename = "/run/pipelights.fifo"
+				if (self.compose == True):
+					self.pipename = '/run/compose.fifo'
+					print "Using compose 2nd generation compositor with PID %d" % self.pid
+				else:
+					self.pipename = "/run/pipelights.fifo"
 				self.address = address
 				try:
 					self.pipe = open(self.pipename,"wb")
@@ -411,22 +423,41 @@ class Holiday:
 			urlstr = 'http://%s/device/light/setlights' % self.address
 			r = requests.put(urlstr, data=hol_msg_str)
 		else:
-			echo = ""
-			ln = 0
-			slist = []
-			while (ln < self.numleds):
-				tripval = (self.leds[ln][0] * 65536) + (self.leds[ln][1] * 256) + self.leds[ln][2]
-				#echo = echo + "%6X" % tripval + "\\" + "\\" + "x0a"  # magic pixie formatting eh?
-				#echo = echo + "%06X\n" % tripval
-				slist.append("%06X\n" % tripval)
-				ln = ln+1
-			#print echo
-			echo = ''.join(slist)	# Meant to be very much faster
-			if self.isSim == True:
-				self.queue.put(echo, block=False)
+			if (self.compose == True):
+				"""Render the LED array to the Holiday
+				This is done by composing a text string in memory
+				Which is then written out to the compositor FIFO pipe in a single go, 
+				So it should be reasonably fast."""
+				rend = []
+				rend.append("0x000000\n")		# No flags for now
+				pid_str = "0x%06x\n" % self.pid
+				rend.append(pid_str)
+				#print pid_str
+				#compositor_str = compositor_str + pid_str		# First two lines are placeholders for now, will be meaningful
+				ln = 0
+				while (ln < self.numleds):
+					tripval = (self.leds[ln][0] * 65536) + (self.leds[ln][1] * 256) + self.leds[ln][2]
+					rend.append("0x%06X\n" % tripval)
+					ln = ln+1
+				self.pipe.write(''.join(rend))
+				self.pipe.flush()				
 			else:
-				self.pipe.write(echo)
-				self.pipe.flush()
+				echo = ""
+				ln = 0
+				slist = []
+				while (ln < self.numleds):
+					tripval = (self.leds[ln][0] * 65536) + (self.leds[ln][1] * 256) + self.leds[ln][2]
+					#echo = echo + "%6X" % tripval + "\\" + "\\" + "x0a"  # magic pixie formatting eh?
+					#echo = echo + "%06X\n" % tripval
+					slist.append("%06X\n" % tripval)
+					ln = ln+1
+				#print echo
+				echo = ''.join(slist)	# Meant to be very much faster
+				if self.isSim == True:
+					self.queue.put(echo, block=False)
+				else:
+					self.pipe.write(echo)
+					self.pipe.flush()
 		return
 		
 	def on(self):
