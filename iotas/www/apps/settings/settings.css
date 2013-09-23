@@ -1,12 +1,20 @@
 /* Settings App */
 
 #settings {
+    background: #000 url(../../assets/background.png) no-repeat 50% 0%;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*#settings {
 	background: #555 url(background-linen.png) repeat 50% 0%;
 	-webkit-background-size: auto;
   -moz-background-size: auto;
   -o-background-size: auto;
   background-size: auto;
-}
+}*/
 
 .network {
 	text-align: left;

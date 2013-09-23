@@ -14,10 +14,6 @@ function about() {
 	// Quit App
 	function appQuit() {
 		console.log("about.appQuit");
-		if (theApp.counter != null) {
-			clearInterval(theApp.counter);
-		}
-		theApp.counter = null;
 	}
 	
 }

@@ -26,11 +26,29 @@
 	
 		<script>
 			
+			// Start the App
+			function start_app() {
+				theApp = new settings(); // Instance an App
+				theApp.appStart(); // Start the App up
+			}
+			
+			// Stop the App
+			function stop_app() {
+				theApp.appQuit(); // Quit the App
+				$( document ).undelegate("#settings", "pageinit", start_app);
+				$( document ).undelegate("#settings", "pagebeforehide", stop_app );
+			}
+	
+			console.log("Location #settings")
+	
+			$( document ).delegate("#settings", "pageinit", start_app);
+			$( document ).delegate("#settings", "pagebeforehide", stop_app);
+
 			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
 			$( '#settings' ).on("pagehide", function(event, ui) {
 				console.log('settings.remove');
 				$('#settings').remove();			// Dump the page from memory
-			});
+			});	
 	
 		</script>
 
@@ -45,15 +63,49 @@
 		
 		<section data-role="content">
 			
-			<a href="hostname/index.html" class="network" data-role="button">Device Name</a>
-			<a href="wifi/index.html" class="network" data-role="button">WiFi configuration</a>
-			<a href="moorescloud/index.html" class="network" data-role="button">The MooresCloud</a>
-			<a href="updates/index.html" class="network" data-role="button">Check for updates</a>
-			<a href="developer/index.html" class="network" data-role="button">Developer Mode</a>
-			<a href="about/index.html" class="network" data-role="button">About</a>
+			<div class="ui-grid-b">
+			
 
+				<div class="ui-block-a">
+					<a href="wifi/" data-transition="slide">
+						<img src="wifi/app-icon-wifi.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="hostname/" data-transition="slide">
+						<img src="hostname/app-icon-hostname.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<a href="updates/" data-transition="slide">
+						<img src="updates/app-icon-updates.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-a">
+					<a href="moorescloud/" data-transition="slide">
+						<img src="moorescloud/app-icon-moorescloud.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="developer/" data-transition="slide">
+						<img src="developer/app-icon-developer.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<a href="about/" data-transition="slide">
+						<img src="about/app-icon-about.png" alt=""/>
+					</a>
+				</div>
+				<div class="ui-block-a">
+					<a href="help/" data-transition="slide">
+						<img src="help/app-icon-help.png" alt=""/>
+					</a>
+				</div>
+				
+			</div>
 			
 		</section>
+
 
 		<div data-role="popup" id="password" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
 			<div data-role="header" data-theme="a" class="ui-corner-top">
