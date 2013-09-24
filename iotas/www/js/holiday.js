@@ -314,7 +314,7 @@ function Holiday(address) {
 		});
 	}
 
-	function setUpdates(doWhenDone) {
+	function doUpdates(doWhenDone) {
 		console.log('holiday.setUpdates');
 		var rest_url = iotasrv.device_url +  'update';
 		console.log(rest_url);
