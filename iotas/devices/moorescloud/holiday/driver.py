@@ -185,7 +185,7 @@ class Holiday:
 		def get_update_status():
 			"""Return True if there are updates to be done"""
 			try:
-				c = subprocess.check_output(['/home/holiday/updates/test_update.sh'])
+				c = subprocess.check_output(['/home/holiday/updates/test_updates.sh'])
 				updates_ready = True
 			except subprocess.CalledProcessError:
 				updates_ready = False

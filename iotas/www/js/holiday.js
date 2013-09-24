@@ -298,9 +298,9 @@ function Holiday(address) {
 			{ 
 				var dj = JSON.parse(data); 
 				if (dj.update_ready == false) {
-					console.log("update test failed")
+					console.log("update test failed");
 				} else {
-					console.log("update test succeeded")
+					console.log("update test succeeded");
 				}
 				if (doWhenDone != null) {
 					doWhenDone(dj.update_ready);
