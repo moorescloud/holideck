@@ -1,0 +1,35 @@
+/* API Demo App */
+
+#updates {
+	background: #000;
+}
+
+#updates p {
+	margin: 0 auto;
+	width: 80%;
+}
+
+#updates .switch {
+	margin: 0 auto;
+	width: 100px;
+}
+
+#updates .ui-btn-inactive {
+	background: blue;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #3373a5;
+	text-decoration: none;
+	background-image: none;
+}
+
+#updates .ui-btn-active {
+	background: crimson;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #3373a5;
+	text-decoration: none;
+	background-image: none;
+}

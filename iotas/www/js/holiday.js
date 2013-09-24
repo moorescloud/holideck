@@ -24,6 +24,8 @@ function Holiday(address) {
 	this.sethostname = sethostname;
 	this.getdevmode = getdevmode;
 	this.setdevmode = setdevmode;
+	this.getUpdates = getUpdates;
+	this.doUpdates = doUpdates;
 
  	this.fastlights = fastlights;
 	var fastbulbs = [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000,
@@ -273,6 +275,68 @@ function Holiday(address) {
 			error: function() 
 			{
 				console.log("setdevmode did not end well.");
+				return false;
+				// We should throw up an error dialog here.
+			}
+		});
+		return;
+	}
+
+	function getUpdates(doWhenDone) {
+		// Make an IoTAS call to return the state of device's developer mode
+		// Use that result to flip the switch so it's reflective of the device state.
+		// It returns the value of dev mode, a boolean.
+		//
+		console.log('holiday.getUpdates');
+		var rest_url = iotasrv.device_url +  'update';
+		console.log(rest_url);
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: rest_url,
+			success: function(data, status, settings) 
+			{ 
+				var dj = JSON.parse(data); 
+				if (dj.update_ready == false) {
+					console.log("update test failed")
+				} else {
+					console.log("update test succeeded")
+				}
+				if (doWhenDone != null) {
+					doWhenDone(dj.update_ready);
+				}
+			},
+			error: function() 
+			{
+				console.log("getUpdates did not end well.");
+				// Throw up an error dialog?
+			}
+		});
+	}
+
+	function setUpdates(doWhenDone) {
+		console.log('holiday.setUpdates');
+		var rest_url = iotasrv.device_url +  'update';
+		console.log(rest_url);
+		$.ajax({
+			type: "PUT",
+			async: true,
+			url: rest_url,
+			success: function(data, status, settings) 
+			{ 
+				var dj = JSON.parse(data); 
+				if (dj.update_done == false) {
+					console.log("updating failed")
+				} else {
+					console.log("updating succeeded")
+				}
+				if (doWhenDone != null) {
+					doWhenDone(dj.update_done);
+				}
+			},
+			error: function() 
+			{
+				console.log("setUpdates did not end well.");
 				return false;
 				// We should throw up an error dialog here.
 			}

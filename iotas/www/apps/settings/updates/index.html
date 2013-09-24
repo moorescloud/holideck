@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Updates</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<!--
+	
+	<link rel="stylesheet" href="../../css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="../../css/holiday-app.css" />
+	<script src="../../js/jquery-1.9.1.min.js"></script>
+	<script src="../../js/jquery.mobile-1.3.1.js"></script>
+	<script src="../../js/holiday.js"></script>
+
+	-->
+
+</head>
+
+<body>
+	
+	<div data-role="page" id="updates" data-add-back-btn="true">
+		
+		<script src="updates.js"></script>
+	
+		<script>
+			
+			// Start the App
+			function start_app() {
+				console.log("start_app")
+				theApp = new updates(); // Instance an App
+				theApp.appStart(); // Start the App
+			}
+			
+			// Stop the App
+			function stop_app() {
+				console.log("stop_app");
+				theApp.appQuit();
+				$( document ).undelegate("#updates", "pageinit", start_app);
+				$( document ).undelegate("#updates", "pagebeforehide", stop_app );
+			}
+	
+			console.log("Location #updates");
+			
+			$( document ).delegate("#updates", "pageinit", start_app);
+			$( document ).delegate("#updates", "pagebeforehide", stop_app);
+
+			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
+			$( '#updates' ).on("pagehide", function(event, ui) {
+				console.log('updates.remove');
+				$('#updates').remove();			// Dump the page from memory
+			});
+	
+		</script>
+
+		
+		<header data-role="header" data-position="fixed">
+			
+			<a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
+			
+			<h1>Updates</h1>
+			
+		</header>
+		
+		<section data-role="content">
+
+			Coming soon!
+			
+		</section>
+		
+	</div>
+	<!-- /updates -->
+		
+</body>
+</html>
