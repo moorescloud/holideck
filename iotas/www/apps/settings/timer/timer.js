@@ -9,11 +9,13 @@ function timer() {
 	function appStart() {
 		console.log("timer.appStart");
 		$("head").append('<link rel="stylesheet" href="timer.css" />');
+		return;
 	}
 	
 	// Quit App
 	function appQuit() {
 		console.log("timer.appQuit");
+		return;
 	}
 	
 	// Set Timer

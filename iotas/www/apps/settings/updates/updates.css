@@ -1,6 +1,15 @@
-/* About screen */
+/* Update screen */
 
-#abouttext {
+#updates {
+	background: #002;
+}
+
+#updates p {
+	margin: 0 auto;
+	width: 80%;
+}
+
+#updatetext {
 	font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #fff;

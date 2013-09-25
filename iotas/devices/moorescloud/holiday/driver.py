@@ -181,10 +181,32 @@ class Holiday:
 					return
 			return			
 
+		@theapp.get(routebase + 'update')
+		def get_update_status():
+			"""Return True if there are updates to be done"""
+			try:
+				c = subprocess.check_output(['/home/holiday/updates/test_updates.sh'])
+				updates_ready = True
+			except subprocess.CalledProcessError:
+				updates_ready = False
+			n = { "update": updates_ready }
+			return json.dumps(n)
+
+		@theapp.put(routebase + 'update')
+		def do_update():
+			"""Runs script to install updates"""
+			try:
+				c = subprocess.check_output(['/home/holiday/updates/do_updates.sh'])
+				updates_done = True
+			except subprocess.CalledProcessError:
+				updates_done = False
+			n = { "update": updates_done }
+			return json.dumps(n)
+
+
 		@theapp.get(routebase)
 		def get_holidays():
 			return json.dumps(self.get_devices())
-
 
 		@theapp.put(routebase + 'setlights')
 		def do_setlights():

@@ -171,3 +171,8 @@ html {
 	padding: 20px;
 }
 
+/* This should give us a custom spinner methinks */
+/*.ui-icon-loading {
+    background: url(/assets/mc_ajax-loader.png);
+    background-size: 32px 32px;
+}*/
