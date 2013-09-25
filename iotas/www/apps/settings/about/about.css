@@ -1,35 +1,8 @@
-/* API Demo App */
+/* About screen */
 
-#developer {
-	background: #000;
-}
-
-#developer p {
-	margin: 0 auto;
-	width: 80%;
-}
-
-#developer .switch {
-	margin: 0 auto;
-	width: 100px;
-}
-
-#developer .ui-btn-inactive {
-	background: blue;
-	font-weight: bold;
+#abouttext {
+	font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;
+	font-size: 14px;
 	color: #fff;
-	cursor: pointer;
-	text-shadow: 0 1px 0 #3373a5;
-	text-decoration: none;
-	background-image: none;
-}
-
-#developer .ui-btn-active {
-	background: crimson;
-	font-weight: bold;
-	color: #fff;
-	cursor: pointer;
-	text-shadow: 0 1px 0 #3373a5;
-	text-decoration: none;
-	background-image: none;
+	text-shadow: none;
 }
