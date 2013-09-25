@@ -156,19 +156,21 @@ html {
 */
 
 #settings {
+/*
 	background: #555 url(../assets/background-linen.png) repeat 50% 0%;
 	-webkit-background-size: auto;
   -moz-background-size: auto;
   -o-background-size: auto;
   background-size: auto;
+*/
 }
 
 .network {
-	text-align: left;
+/* 	text-align: left; */
 }
 
 .password {
-	padding: 20px;
+/* 	padding: 20px; */
 }
 
 /* This should give us a custom spinner methinks */

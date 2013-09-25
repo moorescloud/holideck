@@ -1,18 +1,14 @@
 /* Settings App */
 
 #settings {
-    background: #000 url(../../assets/background.png) no-repeat 50% 0%;
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	background: #000 url(background-linen.png) repeat 0 0;
 }
 
-.network {
+#settings .network {
 	text-align: left;
 }
 
-.password {
+#setting .password {
 	padding: 20px;
 }
 
