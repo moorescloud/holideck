@@ -149,7 +149,11 @@ html {
   background-size: cover;
 }
 
-/* Settings App */
+/* Settings App 
+		- Needs moving to settings.css
+		- But Settings index.html doesn’t initiate JS and appendation
+		- TODO: Mark & Paul to Discuss…
+*/
 
 #settings {
 	background: #555 url(../assets/background-linen.png) repeat 50% 0%;
