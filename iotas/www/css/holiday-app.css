@@ -95,6 +95,13 @@ h1, h2, h3, h4, h5, h6 {
 	text-shadow: none;
 }
 
+h1.device {
+	margin-top: 0;
+	text-align: center;
+	font-weight: normal;
+	font-size: 32px;
+}
+
 h3 {
 	font-size: 12px;
 }
@@ -149,32 +156,3 @@ html {
   background-size: cover;
 }
 
-/* Settings App 
-		- Needs moving to settings.css
-		- But Settings index.html doesn’t initiate JS and appendation
-		- TODO: Mark & Paul to Discuss…
-*/
-
-#settings {
-/*
-	background: #555 url(../assets/background-linen.png) repeat 50% 0%;
-	-webkit-background-size: auto;
-  -moz-background-size: auto;
-  -o-background-size: auto;
-  background-size: auto;
-*/
-}
-
-.network {
-/* 	text-align: left; */
-}
-
-.password {
-/* 	padding: 20px; */
-}
-
-/* This should give us a custom spinner methinks */
-/*.ui-icon-loading {
-    background: url(/assets/mc_ajax-loader.png);
-    background-size: 32px 32px;
-}*/
