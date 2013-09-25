@@ -106,3 +106,25 @@ function quitApp(theid) {
 	theApp.appQuit();
 	theApp = null;
 }
+
+// Class definition for the fun stuffs we have to manage.
+//
+function AppStack() {
+  this.theStack = new Array();
+  this.push = push;
+  this.pop = pop;
+  this.depth = 0;
+
+  function push(anApp) {
+    this.depth = this.theStack.push(anApp);
+  }
+
+  function pop() {
+    if (this.theStack.length > 0) {
+      var retval = this.theStack.pop();
+      this.depth = this.theStack.length;
+      return retval;
+    }
+    return null;
+  }
+}

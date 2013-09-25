@@ -21,6 +21,19 @@
 	<script src="/js/holiday.js"></script>
 
 	<script>
+
+		// Setup some JQuery Mobile loading dialog stuffs...
+		
+		  $.mobile.loader.prototype.options.text = "Loading...";
+		  $.mobile.loader.prototype.options.textVisible = true;
+		  $.mobile.loader.prototype.options.theme = "a";
+		  $.mobile.loader.prototype.options.html = "";
+		  console.log("setting up loader options");
+
+	</script>
+
+
+	<script>
 		
 		// This should prevent failures if the console isn't available
 		// From http://stackoverflow.com/questions/690251/what-happened-to-console-log-in-ie8

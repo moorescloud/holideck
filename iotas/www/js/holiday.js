@@ -297,13 +297,14 @@ function Holiday(address) {
 			success: function(data, status, settings) 
 			{ 
 				var dj = JSON.parse(data); 
-				if (dj.update_ready == false) {
+				//console.log(dj);
+				if (dj.update == false) {
 					console.log("update test failed");
 				} else {
 					console.log("update test succeeded");
 				}
 				if (doWhenDone != null) {
-					doWhenDone(dj.update_ready);
+					doWhenDone(dj.update);
 				}
 			},
 			error: function() 
@@ -325,13 +326,13 @@ function Holiday(address) {
 			success: function(data, status, settings) 
 			{ 
 				var dj = JSON.parse(data); 
-				if (dj.update_done == false) {
+				if (dj.update == false) {
 					console.log("updating failed")
 				} else {
 					console.log("updating succeeded")
 				}
 				if (doWhenDone != null) {
-					doWhenDone(dj.update_done);
+					doWhenDone(dj.update);
 				}
 			},
 			error: function() 

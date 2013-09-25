@@ -25,28 +25,30 @@
 		<script src="settings.js"></script>
 	
 		<script>
-			
+			var settings_app = null;
+
 			// Start the App
-			function start_app() {
-				theApp = new settings(); // Instance an App
-				theApp.appStart(); // Start the App up
+			function settings_start_app() {
+				settings_app = theApp = new settings(); // Instance an App
+				settings_app.appStart(); // Start the App up
 			}
 			
 			// Stop the App
-			function stop_app() {
-				theApp.appQuit(); // Quit the App
-				$( document ).undelegate("#settings", "pageinit", start_app);
-				$( document ).undelegate("#settings", "pagebeforehide", stop_app );
+			function settings_stop_app() {
+				settings_app.appQuit(); // Quit the App
+				$( document ).undelegate("#settings", "pageinit", settings_start_app);
+				$( document ).undelegate("#settings", "pagebeforehide", settings_stop_app );
 			}
 	
 			console.log("Location #settings")
 	
-			$( document ).delegate("#settings", "pageinit", start_app);
-			$( document ).delegate("#settings", "pagebeforehide", stop_app);
+			$( document ).delegate("#settings", "pageinit", settings_start_app);
+			$( document ).delegate("#settings", "pagebeforehide", settings_stop_app);
 
 			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
 			$( '#settings' ).on("pagehide", function(event, ui) {
 				console.log('settings.remove');
+				settings_app = null;
 				$('#settings').remove();			// Dump the page from memory
 			});	
 	

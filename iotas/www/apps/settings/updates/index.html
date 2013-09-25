@@ -25,30 +25,32 @@
 		<script src="updates.js"></script>
 	
 		<script>
-			
+			var updates_app = null;
+
 			// Start the App
-			function start_app() {
-				console.log("start_app")
-				theApp = new updates(); // Instance an App
-				theApp.appStart(); // Start the App
+			function updates_start_app() {
+				console.log("updates_start_app")
+				updates_app = theApp = new updates(); // Instance an App
+				updates_app.appStart(); // Start the App
 			}
 			
 			// Stop the App
-			function stop_app() {
-				console.log("stop_app");
-				theApp.appQuit();
-				$( document ).undelegate("#updates", "pageinit", start_app);
-				$( document ).undelegate("#updates", "pagebeforehide", stop_app );
+			function updates_stop_app() {
+				console.log("updates_stop_app");
+				updates_app.appQuit();
+				$( document ).undelegate("#updates", "pageinit", updates_start_app);
+				$( document ).undelegate("#updates", "pagebeforehide", updates_stop_app );
 			}
 	
 			console.log("Location #updates");
 			
-			$( document ).delegate("#updates", "pageinit", start_app);
-			$( document ).delegate("#updates", "pagebeforehide", stop_app);
+			$( document ).delegate("#updates", "pageinit", updates_start_app);
+			$( document ).delegate("#updates", "pagebeforehide", updates_stop_app);
 
 			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
 			$( '#updates' ).on("pagehide", function(event, ui) {
 				console.log('updates.remove');
+				updates_app = null;
 				$('#updates').remove();			// Dump the page from memory
 			});
 	
@@ -66,7 +68,11 @@
 		<section data-role="content">
 
 			<span id="updatetext"></span>
-			
+			<p/>
+			<form>
+				<input type="button" value="Perform update" id="updatebutton"/>
+			</form>			
+
 		</section>
 		
 	</div>

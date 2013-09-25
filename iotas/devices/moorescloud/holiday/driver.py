@@ -196,7 +196,7 @@ class Holiday:
 		def do_update():
 			"""Runs script to install updates"""
 			try:
-				c = subprocess.check_output(['/home/holiday/updates/do_update.sh'])
+				c = subprocess.check_output(['/home/holiday/updates/do_updates.sh'])
 				updates_done = True
 			except subprocess.CalledProcessError:
 				updates_done = False
