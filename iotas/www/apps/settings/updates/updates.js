@@ -69,12 +69,18 @@ function updates() {
 	function updatesDone(success) {
 		console.log("updates.updatesDone");
 		$.mobile.loading('hide');
+		if (success == true) {
+			$("#updatetext").text("Update successful.");
+		} else {
+			$("#updatetext").text("Update failed.");
+		}
+		$("#updatebutton").button('disable');
 		console.log(success);
 		return;
 	}
 
 	// Update button Listener	
-	$("#updatebutton").on("click", function(e){
+	$("#updatebutton").click(function(e){
 		theApp.doUpdates();		
 	});
 }
