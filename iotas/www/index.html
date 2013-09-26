@@ -142,7 +142,7 @@
 			<div class="strand">
 				
 				<img src="assets/strand.png" alt=""/>
-				<h1 class="device">Your Holiday Name</h1>
+				<h1 class="device" id="devname">Your Holiday Name</h1>
 				
 			</div>
 			
@@ -163,7 +163,9 @@
 	<!-- /x -->
 	
 	<script>
-		console.log("page loaded?");
+		// Theoretically we can now set the hostname.  Let's just see.
+		console.log("Setting screen name to " + iotasrv.hostnm);
+		$('#devname').html(iotasrv.hostnm);	
 	</script>
 </body>
 </html>
