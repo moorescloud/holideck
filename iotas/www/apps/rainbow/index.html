@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
-	<link rel="apple-touch-icon" href="../../apple-touch-icon-57x57.png" />
+	<!--<link rel="apple-touch-icon" href="../../apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png" />
 	<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png" />
 	<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png" />
@@ -18,7 +18,7 @@
 	
 	<script src="../../js/jquery-1.9.1.min.js"></script>
 	<script src="../../js/jquery.mobile-1.3.1.js"></script>
-	<script src="../../js/holiday.js"></script>
+	<script src="../../js/holiday.js"></script>-->
 
 </head>
 
@@ -67,20 +67,24 @@
 		
 		<section data-role="content">
 			
-			<img src="rainbow.png" alt=""/>
-			
-			<div class="switch">
+			<div id="originalapp">
+				<img id="rainbowicon" src="rainbow.png" alt=""/>
 				
-				<form>
-			    <label for="flip" class="ui-hidden-accessible">API Demo Start Stop</label>
-			    <select name="flip" id="flip" data-role="slider">
-		        <option value="stop">Start</option>
-		        <option value="start">Stop</option>
-			    </select>
-				</form>
-				
+				<div class="switch">
+					
+					<form id="rainbowform">
+				    <label for="flip" class="ui-hidden-accessible">API Demo Start Stop</label>
+				    <select name="flip" id="flip" data-role="slider">
+			        <option value="stop">Start</option>
+			        <option value="start">Stop</option>
+				    </select>
+					</form>
+					
+				</div>
 			</div>
-			
+			<div id="appoftheday" style="visibility: hidden;">
+			</div>
+				
 		</section>
 		
 	</div>
