@@ -69,6 +69,7 @@ function hostname() {
 			{
 				console.log("sethostname did not end well.");
 				// We should throw up an error dialog here.
+				// I feel sick X( . (:))
 			}
 		});
 		return;
