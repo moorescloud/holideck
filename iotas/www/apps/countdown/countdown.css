@@ -6,57 +6,37 @@
 	background: #000;
 }
 
-#countdown-app.reveal-modal {
-	top: 110px;
+#countdown #canvas {
+	display: none;
 }
 
-#countdown-app h2 {
-	padding-bottom: 50px;
+#countdown #counter {
+	margin: 0;
+	font-size: 190px;
 }
 
-#countdown-canvas {
-	position: absolute;
-	left: 110px;
+#countdown-secval {
+	padding: .65em;
+	font-weight: bold;
 }
 
-#countdown-app .controls {
-	padding-top: 220px;
+#countdown .start, 
+#countdown .stop, 
+#countdown .reset {
+	color: #fff;
+	text-shadow: #111 0px 1px 0px;
+	float: right;
 }
 
-#countdown-app input {
-	height: 46px;
+#countdown .start {
+	background: #00AD83;
 }
 
-#countdown-app a.button:hover {
-	text-decoration: none;
-}
-
-#countdown-app a.button {
-	border: 1px solid white;
-}
-
-#countdown-app a.button.start {
-	background: green;
-}
-
-#countdown-app a.button.stop {
-	margin-left: 15px;
+#countdown .stop {
 	background: red;
 }
 
-#countdown-app a.button.reset {
-	background: #d6a614;
-}
-
-.button {
-    background: #262C32;
-    font-size: 32px;
-    width: 100px;
-    padding: 9px;
-    letter-spacing: 1px;
-    border: none;
-    color: #EFDDA8;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+#countdown .reset {
+	padding: 11px 13px;
+	background: #ff7f00;
 }

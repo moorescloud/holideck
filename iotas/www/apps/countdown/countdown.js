@@ -35,6 +35,7 @@ function countdown() {
 		this.context.font = "240px 'Droid Sans'";
 		this.context.fillStyle = "white";
 		this.context.fillText(this.secs_to_time(this.count), 15, 180);
+		$('#counter').html(this.secs_to_time(this.count));
 	}
 
 	function resetCountdown() {

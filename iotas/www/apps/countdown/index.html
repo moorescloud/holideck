@@ -8,72 +8,74 @@
 
 <body>
     
-    <div data-role="page" id="countdown">
+	<div data-role="page" id="countdown">
     
-        <script src="countdown.js"></script>
+	  <script src="countdown.js"></script>
+		
+    <script>
+	    
+	    console.log("countdown");
+	
+	    // Start the App
+	    function start_app() {
+	        theApp = new countdown(); // Instance an App
+	        theApp.appStart(); // Start the App up
+	    }
+	    
+	    // Stop the App
+	    function stop_app() {
+	        theApp.appQuit(); // Quit the App
+	        $( document ).undelegate("#countdown", "pageinit", start_app);
+	        $( document ).undelegate("#countdown", "pagebeforehide", stop_app );
+	    }
+	
+	    console.log("Location #countdown")
+	
+	    $( document ).delegate("#countdown", "pageinit", start_app);
+	    $( document ).delegate("#countdown", "pagebeforehide", stop_app);
+	
+	    // Must add this little bit of stuff to every app so it correctly clears itself from the cache
+	    $( '#countdown' ).on("pagehide", function(event, ui) {
+	        console.log('countdown.remove');
+	        $('#countdown').remove();          // Dump the page from memory
+	    });
+	
+    </script>
     
-        <script>
-            
-            console.log("countdown");
-
-            // Start the App
-            function start_app() {
-                theApp = new countdown(); // Instance an App
-                theApp.appStart(); // Start the App up
-            }
-            
-            // Stop the App
-            function stop_app() {
-                theApp.appQuit(); // Quit the App
-                $( document ).undelegate("#countdown", "pageinit", start_app);
-                $( document ).undelegate("#countdown", "pagebeforehide", stop_app );
-            }
+    <header data-role="header" data-position="fixed">
+	    
+	    <a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
+	    
+	    <h1>Countdown Timer</h1>
+	    
+    </header>
     
-            console.log("Location #countdown")
+    <section data-role="content">
+			
+			<canvas id="canvas" width="525" height="220">
+				Your browser does not support the HTML 5 Canvas. 
+			</canvas>
+			
+			<p id="counter">Wallop.</p>
+			
+			<div class="ui-grid-a">
+		    <div class="ui-block-a">
+			    <input id="countdown-secval" type="text" oninput="countdown_secinput()" value="300" />
+		    </div>
+		    <div class="ui-block-b">
+			    <a href="#" class="ui-btn ui-btn-inline ui-corner-all stop" onclick="countdown_stopbutton()">Stop</a>
+			    <a href="#" class="ui-btn ui-btn-inline ui-corner-all reset" onclick="countdown_resetbutton()">Reset</a>
+			    <a href="#" class="ui-btn ui-btn-inline ui-corner-all start" onclick="countdown_startbutton()">Start</a>
+		    </div>
+			</div>
+			
+			
+	    
+	    
+    </section>
     
-            $( document ).delegate("#countdown", "pageinit", start_app);
-            $( document ).delegate("#countdown", "pagebeforehide", stop_app);
-    
-            // Must add this little bit of stuff to every app so it correctly clears itself from the cache
-            $( '#countdown' ).on("pagehide", function(event, ui) {
-                console.log('countdown.remove');
-                $('#countdown').remove();          // Dump the page from memory
-            });
-
-        </script>
-
-        
-        <header data-role="header" data-position="fixed">
-            
-            <a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
-            
-            <h1>Countdown timer</h1>
-            
-        </header>
-        
-        <section data-role="content">
-            
-            <div class="selector">
-                <canvas id="canvas" width="525" height="220">
-                    Your browser does not support the HTML 5 Canvas. 
-                </canvas>
-                <div class="row controls">
-                    <div class="eight columns centered">
-                        <a class="radius button start left" onclick="countdown_startbutton()">Start</a>
-                        <a class="radius button stop" onclick="countdown_stopbutton()">Stop</a>
-                        <a class="radius button reset right" onclick="countdown_resetbutton()">Reset</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="eight columns centered">
-                        <input id="countdown-secval" type="text" oninput="countdown_secinput()" value="300" size="5" style="font-size: 32px;">Seconds</input>
-                    </div>
-                </div>
-            </div>            
-        </section>
-        
-    </div>
-    <!-- /countdown -->
+	</div>
+	<!-- /countdown -->
         
 </body>
 </html>
