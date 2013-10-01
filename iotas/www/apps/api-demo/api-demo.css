@@ -1,4 +1,6 @@
-/* API Demo App */
+/*
+	@file: apps/api-demo/api-demo.css
+*/
 
 #api-demo {
 	background: #000;
@@ -12,14 +14,4 @@
 #api-demo .switch {
 	margin: 0 auto;
 	width: 100px;
-}
-
-#api-demo .ui-btn-active {
-	background: crimson;
-	font-weight: bold;
-	color: #fff;
-	cursor: pointer;
-	text-shadow: 0 1px 0 #3373a5;
-	text-decoration: none;
-	background-image: none;
 }

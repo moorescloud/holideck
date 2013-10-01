@@ -1,4 +1,6 @@
-/* Rainbow App */
+/*
+	@file: apps/rainbow/rainbow.css
+*/
 
 #rainbow {
 	background: #000;
@@ -7,14 +9,4 @@
 #rainbow .switch {
 	margin: 0 auto;
 	width: 100px;
-}
-
-#rainbow .ui-btn-active {
-	background: blue;
-	font-weight: bold;
-	color: #fff;
-	cursor: pointer;
-	text-shadow: 0 1px 0 #3373a5;
-	text-decoration: none;
-	background-image: none;
 }

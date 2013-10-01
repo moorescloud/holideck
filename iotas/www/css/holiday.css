@@ -121,15 +121,15 @@ img {
 
 /* jQM Overrides */
 
-.ui-overlay-a {
+#holiday {
 	background: #000;
 }
 
-.ui-page-theme-a .ui-bar-inherit {
-	border-color: #000;
-	border-color: rgba(0, 0, 0, .8);
+#holiday header {
 	background: #000;
 	background: rgba(0, 0, 0, .8);
+	border-color: #000;
+	border-color: rgba(0, 0, 0, .8);
 }
 
 /* Apps */

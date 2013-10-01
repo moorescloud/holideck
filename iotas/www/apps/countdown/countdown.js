@@ -12,6 +12,7 @@ function countdown() {
 	
 	function appStart() {
 		console.log("countdown.appStart");
+		$("head").append('<link rel="stylesheet" href="countdown.css" />');
 		this.theCanvas = document.getElementById('canvas');
 		this.context = this.theCanvas.getContext('2d');
 		this.startcount = 35;

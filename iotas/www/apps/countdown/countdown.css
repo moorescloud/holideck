@@ -2,6 +2,10 @@
 	@file: apps/countdown/countdown.css
 */
 
+#countdown {
+	background: #000;
+}
+
 #countdown-app.reveal-modal {
 	top: 110px;
 }
@@ -42,4 +46,17 @@
 
 #countdown-app a.button.reset {
 	background: #d6a614;
+}
+
+.button {
+    background: #262C32;
+    font-size: 32px;
+    width: 100px;
+    padding: 9px;
+    letter-spacing: 1px;
+    border: none;
+    color: #EFDDA8;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }

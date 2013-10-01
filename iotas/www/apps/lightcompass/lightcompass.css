@@ -1,9 +1,8 @@
-/* LightCompass App */
+/*
+	@file: apps/lightcompass/lightcompass.css
+*/
 
 #lightcompass {
-  -webkit-background-size: auto;
-  -moz-background-size: auto;
-  -o-background-size: auto;
-  background-size: auto;
+	background: #000;
 }
 
