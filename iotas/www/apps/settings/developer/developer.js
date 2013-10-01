@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/developer/developer.js
+*/
+
 function developer() {
 	
 	console.log("function developer()");

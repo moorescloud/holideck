@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/hostname/hostname.js
+*/
+
 function hostname() {
 	
 	console.log("function hostname()");

@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/about/about.js
+*/
+
 function about() {
 	
 	console.log("function about()");

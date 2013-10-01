@@ -1,4 +1,6 @@
-/* Timer App */
+/*
+	@file: apps/settings/timer/timer.css
+*/
 
 #timer {
 	background: #000 url(timer-background.png) no-repeat 50% 0% fixed;

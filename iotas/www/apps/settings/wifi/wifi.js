@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/wifi/wifi.js
+*/
+
 function wifi() {
 	
 	console.log("function wifi()");
@@ -17,6 +21,7 @@ function wifi() {
 	// Start App
 	function appStart() {
 		console.log("wifi.appStart");
+		$('head').append('<link rel="stylesheet" href="wifi.css" />');
 		wifiGet();
 	}
 	

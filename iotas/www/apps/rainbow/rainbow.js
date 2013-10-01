@@ -1,3 +1,7 @@
+/*
+	@file: apps/rainbow/rainbow.js
+*/
+
 function rainbow() {
 	
 	console.log("function rainbow()");

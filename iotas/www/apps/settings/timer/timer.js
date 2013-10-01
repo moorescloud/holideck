@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/timer/timer.js
+*/
+
 function timer() {
 	
 	console.log("function timer()");
