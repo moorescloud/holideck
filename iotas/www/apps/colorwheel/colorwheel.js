@@ -39,7 +39,7 @@ function colorwheel() {
 	
 	function colorwheelLoaded() {
 		console.log("colorwheel.colorwheelLoaded");
-		theApp.context.drawImage(theApp.tileSheet, 0, 0);	
+		theApp.context.drawImage(theApp.tileSheet, 0, 0, theApp.theCanvas.width, theApp.theCanvas.height);	
 	}
 	
 	function fillPick(red, green, blue){
@@ -97,6 +97,7 @@ function colorwheel() {
 	}
 	
 	function onMouseClick(e) {
+
 		//theApp.mouseX = e.clientX - (theApp.theCanvas.offsetLeft + $(theApp.theCanvas).parent().parent()[0].offsetLeft);
 		//theApp.mouseY = e.clientY - (theApp.theCanvas.offsetTop + $(theApp.theCanvas).parent().parent()[0].offsetTop);	
 		theApp.mouseX = e.clientX - theApp.theCanvas.offsetLeft;
