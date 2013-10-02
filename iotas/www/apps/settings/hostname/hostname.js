@@ -10,6 +10,7 @@ function hostname() {
 	this.appQuit = appQuit;
 	this.gethostname = gethostname;
 	this.sethostname = sethostname;
+	this.validate = validate;
 
 	// Start App
 	function appStart() {
@@ -75,12 +76,21 @@ function hostname() {
 		return;
 	}
 
+	function validate(theName) {
+
+		return
+	}
+
 	// Button Listener	
 	$("#setbutton").on("click", function(e){
 		
 		console.log("setbutton.click");
 		var newhostname = $('#hostnametext').val();
-		theApp.sethostname(newhostname);
+		if (/[^a-zA-Z0-9]/.test(newhostname)) {
+			window.alert("The name must only contain letters and numbers, and no spaces.");
+		} else {
+			theApp.sethostname(newhostname);
+		}
 
 	});
 
