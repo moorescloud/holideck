@@ -15,7 +15,7 @@ __license__ = 'MIT'
 
 import json, socket, os, sys
 import drawlight, setlights
-from bottle import Bottle, run, static_file, post, request
+from bottle import Bottle, run, static_file, post, request, error
 
 # On the command line we can tell iotas to go into real mode possibly
 # invoke as python iotas.py nosim to avoid simulation mode -- which holideck won't
@@ -51,7 +51,12 @@ else:
 print "Startup directory %s" % docroot
 default_name = 'index.html'
 
+# If we 404, we go to the root.
 # Let's do the basic page loadery here
+@app.error(404)
+def redirect_404(error):
+	return server_root()
+
 @app.route('/')
 def server_root():
 	global docroot
