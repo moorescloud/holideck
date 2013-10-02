@@ -9,3 +9,7 @@
 #hostname #hostnametext {
 	padding: .65em;
 }
+
+#setbutton {
+	float: right;
+}
