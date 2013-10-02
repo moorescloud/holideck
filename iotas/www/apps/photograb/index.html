@@ -46,29 +46,34 @@
 			
 			<a href="#apps" class="ui-icon-nodisc ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true" data-rel="back">Apps</a>
 			
-			<h1>Photograbber</h1>
+			<h1>Photo Grabber</h1>
 			
 		</header>
 		
 		<section data-role="content">
+			
 			<div>
 				<form>
-					<input class="photograb-button" id='pic' type="file" accept="image/*" capture="camera" onchange="handlefiles(this.files)">
+					<input class="photograb-button" id="pic" type="file" accept="image/*" capture="camera" onchange="handlefiles(this.files)" />
 				</form>
-			</div>			
+			</div>
+			
 			<div class="photo">
 				<canvas id="canvas" width="290" height="290">
 					Your browser does not support the HTML5 Canvas. 
 				</canvas>
 			</div>
+			
 			<div class="painter">
 				<canvas  id="paintarea" width="290" height="50">
 					Your browser does not support the HTML5 Canvas. 
 				</canvas>
 			</div>
+			
 		</section>
 		
 	</div>
-	<!-- /photograb -->		
+	<!-- /photograb -->
+	
 </body>
 </html>
