@@ -3,8 +3,7 @@
 */
 
 #settings {
-/* 	background: #000 url(background-linen.png) repeat 0 0; */
-	background: #000;
+	background: #000 url(../../assets/background-glow.png) no-repeat 50% 0%;
 }
 
 #settings .network {
