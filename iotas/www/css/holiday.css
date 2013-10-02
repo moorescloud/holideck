@@ -1,8 +1,5 @@
 /* 
-	MooresCloud 
-	@file: holiday-app.css
-	@see: jquery.mobile.x-x-x.css
-	
+	@file: /css/holiday.css
 */
 
 /* Webfonts */
@@ -132,22 +129,61 @@ img {
 	border-color: rgba(0, 0, 0, .8);
 }
 
-/* Apps */
-
-#apps {
-	background: #000 url(../assets/background.png) no-repeat 50% 0%;
+#holiday #apps {
+	background: #000 url(../assets/background-glow.png) no-repeat 50% 0%;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-/* Media Queries */
+#holiday footer {
+	background: transparent url(../assets/background-base.png) no-repeat 50% 0%;
+	border-color: transparent;
+}
+
+#holiday footer .strand {
+	margin: 0 auto;
+	padding-top: .7em;
+	max-width: 200px;
+}
+
+/* Max Out */
 
 @media only screen and (min-width: 768px){
 	.ui-page {
 	  width: 768px !important;
 	  margin: 0 auto !important;
 	  position: relative !important;
+	}
+}
+
+/* RWD Grid */
+
+.ui-grid-rwd {
+	overflow: hidden;
+}
+
+.ui-block-rwd {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	float: left;
+	min-height: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 33.333%;
+}
+
+@media all and (min-width: 30em) {
+	.ui-block-rwd {
+		width: 25%;
+	}
+}
+
+@media all and (min-width: 48em) {
+	.ui-block-rwd {
+		width: 20%;
 	}
 }
