@@ -1,7 +1,9 @@
-/* Update screen */
+/*
+	@file: apps/settings/updates/updates.css
+*/
 
 #updates {
-	background: #002;
+	background: #000;
 }
 
 #updates p {

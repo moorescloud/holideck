@@ -1,3 +1,11 @@
+/*
+	@file: apps/settings/help/help.css
+*/
+
+#help {
+	background: #000;
+}
+
 #helptext {
     font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;
     font-size: 14px;

@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/hostname/hostname.js
+*/
+
 function hostname() {
 	
 	console.log("function hostname()");
@@ -65,6 +69,7 @@ function hostname() {
 			{
 				console.log("sethostname did not end well.");
 				// We should throw up an error dialog here.
+				// I feel sick X( . (:))
 			}
 		});
 		return;

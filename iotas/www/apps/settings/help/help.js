@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/help/help.js
+*/
+
 function help() {
 	
 	console.log("function help()");

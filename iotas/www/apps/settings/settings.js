@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/settings.js
+*/
+
 function settings() {
 	
 	console.log("function settings()");

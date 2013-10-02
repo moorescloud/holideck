@@ -1,3 +1,7 @@
+/*
+	@file: apps/colorwheel/colorwheel.js
+*/
+
 function colorwheel() {
 	
 	this.theCanvas = document.getElementById('canvas');

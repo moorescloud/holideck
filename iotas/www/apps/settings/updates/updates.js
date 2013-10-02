@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/updates/updates.js
+*/
+
 function updates() {
 	
 	console.log("function updates()");

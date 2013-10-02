@@ -1,4 +1,10 @@
-/* About screen */
+/*
+	@file: apps/settings/about/about.css
+*/
+
+#about {
+	background: #000;
+}
 
 #abouttext {
 	font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;

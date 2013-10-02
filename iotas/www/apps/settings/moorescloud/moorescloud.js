@@ -1,3 +1,7 @@
+/*
+	@file: apps/settings/moorescloud/moorescloud.js
+*/
+
 function moorescloud() {
 	
 	console.log("function about()");

@@ -1,7 +1,10 @@
-/* Settings App */
+/*
+	@file: apps/settings/settings.css
+*/
 
 #settings {
-	background: #000 url(background-linen.png) repeat 0 0;
+/* 	background: #000 url(background-linen.png) repeat 0 0; */
+	background: #000;
 }
 
 #settings .network {

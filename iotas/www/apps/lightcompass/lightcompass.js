@@ -1,3 +1,7 @@
+/*
+	@file: apps/lightcompass/lightcompass.js
+*/
+
 function lightcompass() {
 	
 	console.log("function lightcompass()");
