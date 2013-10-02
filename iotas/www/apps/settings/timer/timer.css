@@ -11,25 +11,14 @@
 }
 
 #timer .times {
-	margin: 0 auto;
-	width: 175px;
+	margin: 200px auto 0;
+	width: 50%;
 }
 
-#timer .timerset {
-	margin-left: 37px;
-	position: absolute;
-	bottom: 20px;
-}
-
-#timer label.ui-input-text {
+#timer .times form label {
 	color: #fff;
-	font-size: 12px;
-	text-shadow: none;
 }
 
-#timer input.ui-input-text, 
-#timer textarea.ui-input-text {
-	color: #fff;
-	font-size: 12px;
-	text-shadow: none;
+#timer #timerset {
+	margin-top: 35px;
 }
