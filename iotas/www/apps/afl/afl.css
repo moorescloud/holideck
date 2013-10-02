@@ -10,44 +10,12 @@
   background-size: contain;
 }
 
-#afl .ui-content .ui-listview, 
-#afl .ui-panel-inner > .ui-listview {
-	margin: -15px;
-	margin-top: 0;
+#afl .ui-listview .ui-btn {
+	background: rgba(0, 0, 0, .8);
+	border-color: rgba(0, 0, 0, .9);
 }
 
-#afl .ui-li-desc {
-	display: block;
-	margin: .5em 0 -.6em;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#afl .ui-btn-up-a {
-	border: 1px solid #111;
-	background: #333;
-	background: rgba(0, 0, 0, .8); /* No Images */
-	font-weight: bold;
-	color: #fff;
-	text-shadow: 0 1px 0 #111;
-}
-
-#afl .ui-btn-hover-a {
-	border: 1px solid #000;
-	background: #444;
-	background: rgba(0, 0, 0, .7); /* No Images */
-	font-weight: bold;
-	color: #fff;
-	text-shadow: 0 1px 0 #111;
-}
-
-#afl .ui-li, .ui-li.ui-field-contain {
-	display: block;
-	margin: 0;
-	position: relative;
-	overflow: visible;
-	text-align: left;
-	border-width: 0;
-	border-top-width: 1px solid #111;
+#afl .ui-btn:hover {
+	background: rgba(0, 0, 0, .6);
+	border-color: rgba(0, 0, 0, .7);
 }
