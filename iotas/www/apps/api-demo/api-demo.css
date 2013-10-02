@@ -6,12 +6,26 @@
 	background: #000;
 }
 
-#api-demo p {
-	margin: 0 auto;
-	width: 80%;
+#api-demo img {
+	float: left;
+	width: 33%;
+}
+
+#api-demo h2 {
+	margin-top: 1.3em;
+	font-size: 2em;
+}
+
+#api-demo p.lede {
+	font-size: 14px;
 }
 
 #api-demo .switch {
+	width: 35%;
+	clear: left;
+}
+
+#api-demo .switch form {
 	margin: 0 auto;
 	width: 100px;
 }
