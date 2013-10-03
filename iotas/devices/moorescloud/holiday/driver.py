@@ -57,6 +57,7 @@ class Holiday:
 		self.isSim = False
 		self.inDevMode = False
 		self.device_type = 'moorescloud.holiday'
+		self.appbase = '/home/holiday/bin/apps'		# When turning apps on and off, go here for them.
 
 		# Using the new compositor 'compose' if True
 		self.compose = True 		
@@ -203,6 +204,83 @@ class Holiday:
 			n = { "update": updates_done }
 			return json.dumps(n)
 
+		@theapp.put(routebase + 'rainbow')
+		def do_rainbow():
+			"""Starts/stops the rainbow app"""
+			d = request.body.read()
+			print "Received %s" % d
+			try:
+				dj = json.loads(d)
+			except:
+				print "Bad JSON data, aborting"
+				abort(400, "Bad JSON")
+				return
+
+			if (dj['isStart'] == True):
+				print "starting rainbow app"
+				app_path = os.path.join(self.appbase, 'rainbow')
+				print 'app_path: %s' % app_path
+				try:
+					c = subprocess.call(['/home/holiday/scripts/start-app.sh', app_path], shell=False)
+					print "rainbow app started"
+					success = True
+				except subprocess.CalledProcessError:
+					print "Error starting process"
+					success = False				
+			else:
+				print "stopping rainbow app"
+				try:
+					c = subprocess.call(['/home/holiday/scripts/stop-app.sh'], shell=True)
+					print "rainbow app stopped"
+					success = True
+				except subprocess.CalledProcessError:
+					print "Error stopping process"
+					success = False
+
+			return json.dumps({"success": success})
+
+		@theapp.put(routebase + 'runapp')
+		def do_runapp():
+			"""Starts/stops the named app"""
+			d = request.body.read()
+			print "Received %s" % d
+			try:
+				dj = json.loads(d)
+			except:
+				print "Bad JSON data, aborting"
+				abort(400, "Bad JSON")
+				return
+
+			# Makes sure we have everything we need here
+			if (('isStart' in dj) and ('appname' in dj)):
+				print "We have the parameters"
+			else:
+				print "Missing JSON parameters, aborting"
+				abort(400, "Missing JSON parameters")
+				return
+
+			if (dj['isStart'] == True):
+				print "starting app %s" % dj['appname']
+				app_path = os.path.join(self.appbase, dj['appname'])
+				print 'app_path: %s' % app_path
+				try:
+					c = subprocess.call(['/home/holiday/scripts/start-app.sh', app_path], shell=False)
+					print "%s app started" % dj['appname']
+					success = True
+				except subprocess.CalledProcessError:
+					print "Error starting process"
+					success = False				
+			else:
+				print "stopping %s app" % dj['appname']
+				try:
+					c = subprocess.call(['/home/holiday/scripts/stop-app.sh'], shell=True)
+					print "%s app stopped" % dj['appname']
+					success = True
+				except subprocess.CalledProcessError:
+					print "Error stopping process"
+					success = False
+
+			return json.dumps({"success": success})
 
 		@theapp.get(routebase)
 		def get_holidays():

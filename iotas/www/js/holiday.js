@@ -42,6 +42,7 @@ function Holiday(address) {
  	this.nrl = nrl;
  	this.afl = afl;
  	this.rainbow = rainbow;
+ 	this.runapp = runapp;
  
 	function rgbtocolor(r, g, b) {
 	
@@ -159,13 +160,54 @@ function Holiday(address) {
 		});		
 	}
 
-	function rainbow(team_number) {
-		nrljson = JSON.stringify({"running": team_number});
+	function rainbow(isStart) {
+		console.log('holiday.rainbow');
+		rainbowjson = JSON.stringify({"isStart": isStart});
+		var rest_url = iotasrv.device_url +  'rainbow';
 		$.ajax({
 			type: "PUT",
-			url: this.urlbase + '/device/holiday/app/rainbow', 
-			data: nrljson
-		});		
+			async: false,
+			url: rest_url, 
+			data: rainbowjson,
+			success: function(data, status, settings) 
+			{ 
+				dj = JSON.parse(data); 
+				if (dj.success == true) {
+					console.log("holiday.rainbow succeeded");
+				} else {
+					console.log("holiday.rainbow failed");					
+				}
+			},
+			error: function() 
+			{
+				console.log("holiday.rainbow did not end well.");
+			}
+		});
+	}
+
+	function runapp(appname, isStart) {
+		console.log('holiday.runapp');
+		runappjson = JSON.stringify({"isStart": isStart, "appname": appname});
+		var rest_url = iotasrv.device_url +  'runapp';
+		$.ajax({
+			type: "PUT",
+			async: false,
+			url: rest_url, 
+			data: runappjson,
+			success: function(data, status, settings) 
+			{ 
+				dj = JSON.parse(data); 
+				if (dj.success == true) {
+					console.log("holiday.runapp succeeded");
+				} else {
+					console.log("holiday.runapp failed");					
+				}
+			},
+			error: function() 
+			{
+				console.log("holiday.runapp did not end well.");
+			}
+		});
 	}
 
 	// Here are Holiday device-specific functions relating to MooresCloud OS

@@ -60,7 +60,8 @@ function rainbow() {
 		console.log("rainbow.demoStart");
 		if (theApp.running == false) {
 			theApp.running = true;
-			currentLight.rainbow(true);
+			//currentLight.rainbow(true);
+			currentLight.runapp('rainbow', true);
 		}
 	}
 	
@@ -71,7 +72,8 @@ function rainbow() {
 		// Insert IoTAS Code
 		//
 		console.log("rainbow.demoStop");
-		currentLight.rainbow(false);
+		//currentLight.rainbow(false);
+		currentLight.runapp('rainbow', false);
 		theApp.running = false;
 
 	}
