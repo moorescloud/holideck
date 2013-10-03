@@ -282,6 +282,15 @@ class Holiday:
 
 			return json.dumps({"success": success})
 
+		@theapp.get(routebase + 'version')
+		def get_version():
+			return json.dumps({ "version": "1.0a5" })
+
+		@theapp.get(routebase + 'swift_version')
+		def get_swift_version():
+			return json.dumps({ "version": "1.0a4" })
+
+
 		@theapp.get(routebase)
 		def get_holidays():
 			return json.dumps(self.get_devices())

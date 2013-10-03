@@ -26,6 +26,8 @@ function Holiday(address) {
 	this.setdevmode = setdevmode;
 	this.getUpdates = getUpdates;
 	this.doUpdates = doUpdates;
+	this.getHolidayVersion = getHolidayVersion;
+	this.getSwiftVersion = getSwiftVersion;
 
  	this.fastlights = fastlights;
 	var fastbulbs = [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000, 0x000000,
@@ -385,6 +387,50 @@ function Holiday(address) {
 			}
 		});
 		return;
+	}
+
+	function getHolidayVersion(doWhenDone) {
+		console.log('holiday.getHolidayVersion');
+		var rest_url = iotasrv.device_url +  'version';
+		console.log(rest_url);
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: rest_url,
+			success: function(data, status, settings) 
+			{ 
+				console.log('holiday.getHolidayVersion succeeded')
+				var dj = JSON.parse(data); 
+				doWhenDone(dj);
+			},
+			error: function() 
+			{
+				console.log("getHolidayVersion did not end well.");
+				// Throw up an error dialog?
+			}
+		});		
+	}
+
+	function getSwiftVersion(doWhenDone) {
+		console.log('holiday.getSwiftVersion');
+		var rest_url = iotasrv.device_url +  'swift_version';
+		console.log(rest_url);
+		$.ajax({
+			type: "GET",
+			async: true,
+			url: rest_url,
+			success: function(data, status, settings) 
+			{ 
+				console.log('holiday.getSwiftVersion succeeded')
+				var dj = JSON.parse(data); 
+				doWhenDone(dj);
+			},
+			error: function() 
+			{
+				console.log("getSwiftVersion did not end well.");
+				// Throw up an error dialog?
+			}
+		});		
 	}
 
 	// Legacy, ignored

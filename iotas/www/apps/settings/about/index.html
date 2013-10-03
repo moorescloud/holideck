@@ -15,24 +15,24 @@
 		<script>
 			
 			// Start the App
-			function start_app() {
+			function about_start_app() {
 				console.log("start_app")
 				theApp = new about(); // Instance an App
 				theApp.appStart(); // Start the App
 			}
 			
 			// Stop the App
-			function stop_app() {
+			function about_stop_app() {
 				console.log("stop_app");
 				theApp.appQuit();
-				$( document ).undelegate("#about", "pageinit", start_app);
-				$( document ).undelegate("#about", "pagebeforehide", stop_app );
+				$( document ).undelegate("#about", "pageinit", about_start_app);
+				$( document ).undelegate("#about", "pagebeforehide", about_stop_app );
 			}
 	
 			console.log("Location #about");
 			
-			$( document ).delegate("#about", "pageinit", start_app);
-			$( document ).delegate("#about", "pagebeforehide", stop_app);
+			$( document ).delegate("#about", "pageinit", about_start_app);
+			$( document ).delegate("#about", "pagebeforehide", about_stop_app);
 
 			// Must add this little bit of stuff to every app so it correctly clears itself from the cache
 			$( '#about' ).on("pagehide", function(event, ui) {
@@ -53,7 +53,13 @@
 		
 		<section data-role="content">
 			
-			<span id="abouttext">Coming soon!</span>
+			<center>
+				<img id="holidayimg" src="holiday_logo.png" />
+			</center>
+			<div class="abouttext" id="release-version"></div><br/>
+			<div class="abouttext" id="iotas-version"></div></br>
+			<div class="abouttext" id="swift-version"></div></br>
+			<div class="abouttext">Copyright (C) 2013, MooresCloud Pty Ltd.  Released under the MIT License.</div>
 
 			
 		</section>

@@ -3,12 +3,31 @@
 */
 
 #about {
-	background: #000;
+	background: #fff;
 }
 
-#abouttext {
+.abouttext {
 	font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	color: #fff;
+	color: #000;
 	text-shadow: none;
+}
+
+body {
+	font-family: 'Droid Sans', 'droid_sansregular', Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #000;
+	text-shadow: none;	
+}
+
+.center
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:70%;
+	background-color:#b0e0e6;
+}
+
+#holidayimg {
+	max-width: 250px;
 }
