@@ -87,29 +87,8 @@ function colorwheel() {
 	  currentLight.setlamp(p[0], p[1], p[2]);
 	});
 	
-	$('#canvas').touchstart(function(e) {
-		e.preventDefault();
-	  var pos = getPageOffset(this);
-	  var x = e.pageX - pos.x;
-	  var y = e.pageY - pos.y;
-	  var c = this.getContext('2d');
-	  var p = c.getImageData(x, y, 1, 1).data;
-	  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-	  $(".pick").css('background-color', hex);
-	  var hexy = "#" + ("000000" + rgbToHex(255 - p[0], 255 - p[1], 255 - p[2])).slice(-6);
-	  $(".complement").css('background-color', hexy);
-	  theApp.pickR = p[0]
-		theApp.pickG = p[1]
-		theApp.pickB = p[2]
-	  theApp.complementR = 255 - p[0]
-		theApp.complementG = 255 - p[1]
-		theApp.complementB = 255 - p[2]
-	  currentLight.setlamp(p[0], p[1], p[2]);
-	});
-	
-/*
-	function onTouchStart(e) {
-		var touch = e.touches[0];
+	function onTouchStart(t) {
+		var touch = t.touches[0];
 		var pos = getPageOffset(touch);
 		var x = touch.pageX - pos.x;
 	  var y = touch.pageY - pos.y;
@@ -127,36 +106,20 @@ function colorwheel() {
 		theApp.complementG = 255 - p[1]
 		theApp.complementB = 255 - p[2]
 	  currentLight.setlamp(p[0], p[1], p[2]);
-		
-/* 		theApp.mouseX = touch.clientX - theApp.theCanvas.offsetLeft; */
-/* 		theApp.mouseY = touch.clientY - theApp.theCanvas.offsetTop; */
-/* 		console.log("mouseX " + theApp.mouseX + " mouseY " + theApp.mouseY);   */
-/* 		imageData = theApp.context.getImageData(theApp.mouseX,theApp.mouseY,1,1); */
-/* 		var red = imageData.data[0]; */
-/* 		var green = imageData.data[1]; */
-/* 		var blue = imageData.data[2]; */
-/* 		console.log("onTouchStart: rgb(" + red.toString(16) + ", " + green.toString(16) + ", " + blue.toString(16) + ")") */
-/* 		fillPick(imageData.data[0], imageData.data[1], imageData.data[2]); */
-/* 		fillComp(imageData.data[0], imageData.data[1], imageData.data[2]); */
-/* 		currentLight.setlamp(red, green, blue); */
-		
-/* 		theApp.lastTouch = new Date().getTime();	 */
-/* 	} */
-/* */ 
+		theApp.lastTouch = new Date().getTime();	
+	}
 	
-/*
-	function onTouchMove(e) {
+	function onTouchMove(m) {
 		console.log("colorwheel.onTouchMove");
-		event.preventDefault();
+		m.preventDefault();
 		curr = new Date().getTime();
 		if ((curr - theApp.lastTouch) > 100) {
 			console.log("Accepting onTouchMove");
-			theApp.onTouchStart(e);
+			theApp.onTouchStart(m);
 		} else {
 			console.log("Declining onTouchMove");
 		}
 	}
-*/
 	
 	$(".pick").click(function(){
 		console.log("colorwheel.pickClick");
