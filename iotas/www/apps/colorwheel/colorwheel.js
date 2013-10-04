@@ -21,6 +21,7 @@ function colorwheel() {
 	
 	this.appStart = appStart;
 	this.appQuit = appQuit;
+	this.getPageOffset = getPageOffset;
 	
 	//this.fillPick = fillPick;
 	//this.fillComp = fillComp;
@@ -58,6 +59,8 @@ function colorwheel() {
 	$(window).resize(setCanvasImage);
 	
 	$('#canvas').mousemove(function(e) {
+		console.log('colorwheel.mousemove');
+		e.preventDefault();
 	  var pos = getPageOffset(this);
 	  var x = e.pageX - pos.x;
 	  var y = e.pageY - pos.y;
@@ -68,7 +71,9 @@ function colorwheel() {
 	  $(".hover").css('background-color', hex);
 	});
 	
-	$('#canvas').mouseup(function(e) {
+	/*$('#canvas').mouseup(function(e) {
+		console.log('colorwheel.mouseup');
+		e.preventDefault();
 	  var pos = getPageOffset(this);
 	  var x = e.pageX - pos.x;
 	  var y = e.pageY - pos.y;
@@ -85,9 +90,34 @@ function colorwheel() {
 		theApp.complementG = 255 - p[1]
 		theApp.complementB = 255 - p[2]
 	  currentLight.setlamp(p[0], p[1], p[2]);
+	});*/
+
+	$('#canvas').bind('vmousedown', function(e) {
+		console.log('colorwheel.vmousedown');
+		e.preventDefault();
+	  var pos = theApp.getPageOffset(this);
+	  var x = e.pageX - pos.x;
+	  var y = e.pageY - pos.y;
+	  //var c = theApp.theContext.getContext('2d');
+	  var p = theApp.context.getImageData(x, y, 1, 1).data;
+	  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+	  $(".pick").css('background-color', hex);
+	  var hexy = "#" + ("000000" + rgbToHex(255 - p[0], 255 - p[1], 255 - p[2])).slice(-6);
+	  $(".complement").css('background-color', hexy);
+	  theApp.pickR = p[0]
+		theApp.pickG = p[1]
+		theApp.pickB = p[2]
+	  theApp.complementR = 255 - p[0]
+		theApp.complementG = 255 - p[1]
+		theApp.complementB = 255 - p[2]
+	  currentLight.setlamp(p[0], p[1], p[2]);
+	  theApp.lastTouch = new Date().getTime();
 	});
+
 	
-	function onTouchStart(t) {
+	/*$('#canvas').touchstart(function(t) {
+		console.log('colorwheel.touchstart')
+		t.preventDefault();
 		var touch = t.touches[0];
 		var pos = getPageOffset(touch);
 		var x = touch.pageX - pos.x;
@@ -107,9 +137,75 @@ function colorwheel() {
 		theApp.complementB = 255 - p[2]
 	  currentLight.setlamp(p[0], p[1], p[2]);
 		theApp.lastTouch = new Date().getTime();	
-	}
+	});*/
+
+	$('#canvas').bind('touchmove', function(e) {
+		console.log("colorwheel.touchmove");
+		console.log(e);
+		e.preventDefault();
+		curr = new Date().getTime();
+		if ((curr - theApp.lastTouch) > 100) {
+			  console.log("Accepting touchmove");
+	 		  var touchpt = e.originalEvent.touches[0];
+			  var pos = theApp.getPageOffset(this);
+			  var x = touchpt.pageX - pos.x;
+			  var y = touchpt.pageY - pos.y;
+			  var c = document.getElementById('canvas').getContext('2d');
+			  console.log(x, y);
+			  var p = c.getImageData(x, y, 1, 1).data;
+			  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+			  $(".pick").css('background-color', hex);
+			  var hexy = "#" + ("000000" + rgbToHex(255 - p[0], 255 - p[1], 255 - p[2])).slice(-6);
+			  $(".complement").css('background-color', hexy);
+			  theApp.pickR = p[0]
+				theApp.pickG = p[1]
+				theApp.pickB = p[2]
+			  theApp.complementR = 255 - p[0]
+				theApp.complementG = 255 - p[1]
+				theApp.complementB = 255 - p[2]
+			  currentLight.setlamp(p[0], p[1], p[2]);
+			  theApp.lastTouch = curr;
+		} /*else {
+			console.log("Declining touchmove");
+		}*/
+	});
+
+	/*$('#canvas').bind('vmousemove', function(m) {
+		console.log("colorwheel.vmousemove");
+		m.preventDefault();
+		curr = new Date().getTime();
+		if ((curr - theApp.lastTouch) > 100) {
+			console.log("Accepting vmousemove");
+			theApp.onTouchStart(m);
+		} else {
+			console.log("Declining vmousemove");
+		}
+	});*/
+
+
+	/*function onTouchStart(t) {
+		var touch = t.touches[0];
+		var pos = getPageOffset(touch);
+		var x = touch.pageX - pos.x;
+	  var y = touch.pageY - pos.y;
+	  var coord = "x = " + x + ", y = " + y;
+	  var c = this.getContext('2d');
+	  var p = c.getImageData(x, y, 1, 1).data;
+	  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+	  $(".pick").css('background-color', hex);
+	  var hexy = "#" + ("000000" + rgbToHex(255 - p[0], 255 - p[1], 255 - p[2])).slice(-6);
+	  $(".complement").css('background-color', hexy);
+	  theApp.pickR = p[0]
+		theApp.pickG = p[1]
+		theApp.pickB = p[2]
+	  theApp.complementR = 255 - p[0]
+		theApp.complementG = 255 - p[1]
+		theApp.complementB = 255 - p[2]
+	  currentLight.setlamp(p[0], p[1], p[2]);
+		theApp.lastTouch = new Date().getTime();	
+	}*/
 	
-	function onTouchMove(m) {
+	/*function onTouchMove(m) {
 		console.log("colorwheel.onTouchMove");
 		m.preventDefault();
 		curr = new Date().getTime();
@@ -119,7 +215,7 @@ function colorwheel() {
 		} else {
 			console.log("Declining onTouchMove");
 		}
-	}
+	}*/
 	
 	$(".pick").click(function(){
 		console.log("colorwheel.pickClick");
