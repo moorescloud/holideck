@@ -538,7 +538,7 @@ class Holiday:
 				Which is then written out to the compositor FIFO pipe in a single go, 
 				So it should be reasonably fast."""
 				rend = []
-				rend.append("0x000000\n")		# No flags for now
+				rend.append("0x000010\n")		# clear flag set for now 
 				pid_str = "0x%06x\n" % self.pid
 				rend.append(pid_str)
 				#print pid_str
