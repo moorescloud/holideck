@@ -67,7 +67,7 @@ function colorwheel() {
 	  var c = this.getContext('2d');
 	  var p = c.getImageData(x, y, 1, 1).data; 
 	  var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-	  $('.radar p').html("X: " + x + " Y: " + y + " Hex: " + hex);
+	  //$('.radar p').html("X: " + x + " Y: " + y + " Hex: " + hex);
 	  $(".hover").css('background-color', hex);
 	});
 	
