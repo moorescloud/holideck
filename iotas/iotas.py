@@ -10,7 +10,7 @@ License: MIT (see LICENSE for details)
 """
 
 __author__ = 'Mark Pesce'
-__version__ = '0.02-dev'
+__version__ = '1.0b3'
 __license__ = 'MIT'
 
 import json, socket, os, sys
@@ -117,7 +117,7 @@ def do_iotas_info():
 	# end = html.find("</body>")
 	# start = html.find("Address:") + 9
 	# external_ip = html[start:end].strip() 
-	resp = { "version": "0.1a", "apis": [], "host_name": hostname, "ip": external_ip, "local_device": app.licht.device_type, "local_name": app.licht.name }
+	resp = { "version": __version__, "apis": [], "host_name": hostname, "ip": external_ip, "local_device": app.licht.device_type, "local_name": app.licht.name }
 	return json.dumps(resp)
 
 @app.get('/devices')

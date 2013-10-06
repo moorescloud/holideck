@@ -10,7 +10,7 @@ License: MIT (see LICENSE for details)
 """
 
 __author__ = 'Mark Pesce'
-__version__ = '0.1a'
+__version__ = '1.0b3'
 __license__ = 'MIT'
 
 import subprocess, time, os
@@ -284,11 +284,11 @@ class Holiday:
 
 		@theapp.get(routebase + 'version')
 		def get_version():
-			return json.dumps({ "version": "1.0a5" })
+			return json.dumps({ "version": __version__ })
 
 		@theapp.get(routebase + 'swift_version')
 		def get_swift_version():
-			return json.dumps({ "version": "1.0a4" })
+			return json.dumps({ "version": "1.0b3" })
 
 
 		@theapp.get(routebase)
