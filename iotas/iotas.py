@@ -291,8 +291,7 @@ def new_run():
 	app.licht.create_routes(app)										# Adds in all the routes for device
 
 	#the_srv = 'wsgiref'  
-	#the_srv = 'cherrypy'
-	the_srv = 'rocket'
+	the_srv = 'cherrypy'
 	#print app.licht
 
 	#print 'Routes'
