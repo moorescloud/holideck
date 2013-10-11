@@ -5,3 +5,13 @@
 #photograb {
 	background: #000;
 }
+
+#photograb #canvas {
+	border: 1px solid #fff;
+	background: #000;
+}
+
+#photograb #paintarea {
+	border: 1px solid #fff;
+	background: #000;
+}
