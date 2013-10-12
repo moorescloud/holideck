@@ -2,7 +2,7 @@
 	@file: apps/photograb/photograb.js
 */
 
-var photograb_img = null;
+var photograb_img = null; // Hmm, not used…
 
 function photograb() {
 	
@@ -14,6 +14,7 @@ function photograb() {
 	this.drawPaintArea = drawPaintArea;
 	this.clr2hex = clr2hex;
 	this.lastTouch = null;
+	this.setCanvasSize = setCanvasSize;
 	
 	// Coords
 	this.mouseX = 0;
@@ -49,10 +50,34 @@ function photograb() {
 		console.log("photograb.appStart");
 		$('head').append('<link rel="stylesheet" href="photograb.css" />'); // Muy importante!
 		sampApp();
+		setTimeout(function() {
+			setCanvasSize();
+			setPainterSize();
+		}, 500);
 	}
+	
+	$(window).resize(setCanvasSize);
+	$(window).resize(setPainterSize);
 	
 	function appQuit() {
 		console.log("photograb.appQuit");
+	}
+	
+	function setCanvasSize() {
+		console.log("photograb.setCanvasSize");
+		var w = $('.canvas-container').width();
+		var h = $('.canvas-container').height();
+		$('#canvas').attr('width', w);
+		$('#canvas').attr('height', h);
+	}
+	
+	function setPainterSize() {
+		console.log("photograb.setPaintAreaSize");
+		var w = $('.paintarea-container').width();
+		//var h = $('.paintarea-container').height();
+		var h = 50;
+		$('#paintarea').attr('width', w);
+		$('#paintarea').attr('height', h);
 	}
 	
 	function drawPaintArea() {
@@ -65,7 +90,7 @@ function photograb() {
 		// Get Painter Dimensions
 		var w = theApp.thePainter.width;
 		var h = theApp.thePainter.height;
-		console.log("W: " + w + ", H: " + h);
+		//console.log("W: " + w + ", H: " + h);
 		
 		// Width / 50 Globes
 		var i = w / 50.0;
@@ -189,13 +214,9 @@ function photograb() {
 	}
 
 	function onPaintTouchMove(e) {
-		
 		console.log('photograb.onPaintTouchMove');
-		
 		event.preventDefault();
-		
 		onPaintTouchStart(e);
-		
 	}
 
 	function onSampMouseMove(e) {
@@ -222,7 +243,7 @@ function photograb() {
 		var pos = getPageOffset(this);
 		var x = e.pageX - pos.x;
 	  var y = e.pageY - pos.y;
-	  console.log("X: " + x + ", Y: " + y);
+	  //console.log("X: " + x + ", Y: " + y);
 		
 		// New RGB
 		var rgb = theApp.context.getImageData(x, y, 1, 1).data;
@@ -257,7 +278,7 @@ function photograb() {
 		var pos = getPageOffset(this);
 		var x = touch.pageX - pos.x;
 	  var y = touch.pageY - pos.y;
-	  console.log("X: " + x + ", Y: " + y);
+	  //console.log("X: " + x + ", Y: " + y);
 		
 		// Old RGB
 		//imageData = theApp.context.getImageData(theApp.mouseX,theApp.mouseY,1,1);
@@ -269,8 +290,6 @@ function photograb() {
 		// New RGB
 		var rgb = theApp.context.getImageData(x, y, 1, 1).data;
 		theApp.r = rgb[0];
-		console.log(rgb[0]);
-		console.log(theApp.r);
 		theApp.g = rgb[1];
 		theApp.b = rgb[2];
 		
@@ -294,7 +313,7 @@ function photograb() {
 		if ((curr - theApp.lastTouch) > 50) {
 			onSampTouchStart(e);
 		} else {
-			console.log("ignoring");
+			//console.log("ignoring");
 		}
 		
 	}
@@ -364,10 +383,10 @@ function photograb() {
 
 function handlefiles(tf){
 	console.log("handlefiles got ", tf.length, " files");	
+	theApp.setCanvasSize();
 	var file = tf[0];
 	var mpImg = new MegaPixImage(file);
 	var resCanvas1 = document.getElementById('canvas');
-	console.log("dimensions: ", theApp.theCanvas.width, theApp.theCanvas.height)
 	mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
 	theApp.drawPaintArea();
 	return;

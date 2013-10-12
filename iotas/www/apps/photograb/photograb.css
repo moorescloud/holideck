@@ -6,9 +6,20 @@
 	background: #000;
 }
 
+#photograb .canvas-container {
+	margin-bottom: 10px;
+	line-height: 0;
+	width: 100%;
+}
+
 #photograb #canvas {
 	border: 1px solid #fff;
 	background: #000;
+}
+
+#photograb .paintarea-containter {
+	line-height: 0;
+	width: 100%;
 }
 
 #photograb #paintarea {
