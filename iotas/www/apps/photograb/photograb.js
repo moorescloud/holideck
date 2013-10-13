@@ -15,6 +15,8 @@ function photograb() {
 	this.clr2hex = clr2hex;
 	this.lastTouch = null;
 	this.setCanvasSize = setCanvasSize;
+	this.mpImg = null;
+	this.getPageOffset = getPageOffset;
 	
 	// Coords
 	this.mouseX = 0;
@@ -38,14 +40,22 @@ function photograb() {
 	
 	// Listeners
 	this.theCanvas.addEventListener("mousemove", onSampMouseMove, false);
-	this.theCanvas.addEventListener("click", onSampMouseClick, false);
-	this.theCanvas.addEventListener("touchstart", onSampTouchStart, false);
-	this.theCanvas.addEventListener("touchmove", onSampTouchMove, false);
+	//this.theCanvas.addEventListener("click", onSampMouseClick, false);
+	//this.theCanvas.addEventListener("touchstart", onSampTouchStart, false);
+	//this.theCanvas.addEventListener("touchmove", onSampTouchMove, false);
 	this.thePainter.addEventListener("mousemove", onPaintMouseMove, false);
 	this.thePainter.addEventListener("click", onPaintMouseClick, false);
 	this.thePainter.addEventListener("touchstart", onPaintTouchStart, false);
 	this.thePainter.addEventListener("touchmove", onPaintTouchMove, false);
-	
+
+	// Are we running on a Retina-class display?
+	// If so, track the pixel ratio, as we'll need it.
+	this.devicePixelRatio = 1;
+	if ('devicePixelRatio' in window) {
+		this.devicePixelRatio = window.devicePixelRatio;
+	}
+	console.log("The devicePixelRatio is: ", this.devicePixelRatio);
+
 	function appStart() {
 		console.log("photograb.appStart");
 		$('head').append('<link rel="stylesheet" href="photograb.css" />'); // Muy importante!
@@ -56,19 +66,34 @@ function photograb() {
 		}, 500);
 	}
 	
-	$(window).resize(setCanvasSize);
-	$(window).resize(setPainterSize);
+	//$(window).resize(setCanvasSize);
+	//$(window).resize(setPainterSize);
+	$(window).resize(function() {
+		setCanvasSize();
+		setPainterSize();
+	});
 	
 	function appQuit() {
 		console.log("photograb.appQuit");
 	}
 	
 	function setCanvasSize() {
+
 		console.log("photograb.setCanvasSize");
 		var w = $('.canvas-container').width();
 		var h = $('.canvas-container').height();
-		$('#canvas').attr('width', w);
-		$('#canvas').attr('height', h);
+		var wRetina = w * theApp.devicePixelRatio;
+		var hRetina = h * theApp.devicePixelRatio;
+
+		console.log("setting canvas size to: ", wRetina, " x ", hRetina);
+		$('#canvas').attr('width', wRetina);
+		$('#canvas').attr('height', hRetina);
+
+		// Resized so redraw
+		if (theApp.mpImg != null) {
+			var resCanvas1 = document.getElementById('canvas');
+			theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
+		}
 	}
 	
 	function setPainterSize() {
@@ -140,7 +165,61 @@ function photograb() {
 		theApp.painterContext.stroke();
 
 	}
+
+	$('#canvas').bind('vmousedown', function(e) {
+		console.log('photograb.vmousedown');
+		e.preventDefault();
+	  	var pos = theApp.getPageOffset(this);
+	  	var x = e.pageX - pos.x;
+	  	var y = e.pageY - pos.y;
+
+		// New RGB
+		var rgb = theApp.context.getImageData(x, y, 1, 1).data;
+		theApp.r = rgb[0];
+		theApp.g = rgb[1];
+		theApp.b = rgb[2];
+		
+		// UI Output
+		var colour = rgbToHex(theApp.r, theApp.g, theApp.b);
+		$(".canvas").html("Canvas: " + x + " / " + y + " (#" + colour + ")");
+		
+		// Refresh
+		theApp.drawPaintArea();
+		theApp.lastTouch = new Date().getTime();
+	});
 	
+	$('#canvas').bind('touchmove', function(e) {
+		console.log("photograb.touchmove");
+		console.log(e);
+		e.preventDefault();
+		curr = new Date().getTime();
+		if ((curr - theApp.lastTouch) > 100) {
+			  console.log("Accepting touchmove");
+	 		  var touchpt = e.originalEvent.touches[0];
+			  var pos = theApp.getPageOffset(this);
+			  var x = touchpt.pageX - pos.x;
+			  var y = touchpt.pageY - pos.y;
+			  var c = document.getElementById('canvas').getContext('2d');
+
+			// New RGB
+			var rgb = c.getImageData(x, y, 1, 1).data;
+			theApp.r = rgb[0];
+			theApp.g = rgb[1];
+			theApp.b = rgb[2];
+			
+			// UI Output
+			var colour = rgbToHex(theApp.r, theApp.g, theApp.b);
+			$(".canvas").html("Canvas: " + x + " / " + y + " (#" + colour + ")");
+		
+			// Refresh
+			theApp.drawPaintArea();
+			theApp.lastTouch = new Date().getTime();
+		} /*else {
+			console.log("Declining touchmove");
+		}*/
+	});
+
+
 	function onPaintMouseMove(e) {
 		console.log('photograb.onPaintMouseMove');
 	}
@@ -223,7 +302,7 @@ function photograb() {
 		console.log('photograb.onSampMouseMove');
 	}
 	
-	function onSampMouseClick(e) {
+/*	function onSampMouseClick(e) {
 		
 		console.log('photograb.onSampMouseClick');
 		
@@ -267,7 +346,8 @@ function photograb() {
 		event.preventDefault();
 		
 		//var touch = e.originalEvent.touches[0];
-		var touch = e.touches[0];
+		var touch = e.originalEvent.touches[0];
+		//var touch = e.touches[0];
 		
 		// Old Coordinates
 		//theApp.mouseX = touch.clientX - theApp.theCanvas.offsetLeft;
@@ -301,7 +381,7 @@ function photograb() {
 		theApp.drawPaintArea();
 		theApp.lastTouch = new Date().getTime();
 		
-	}
+	}*/
 	
 	function onSampTouchMove(e) {
 		
@@ -385,9 +465,9 @@ function handlefiles(tf){
 	console.log("handlefiles got ", tf.length, " files");	
 	theApp.setCanvasSize();
 	var file = tf[0];
-	var mpImg = new MegaPixImage(file);
+	theApp.mpImg = new MegaPixImage(file);
 	var resCanvas1 = document.getElementById('canvas');
-	mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
+	theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
 	theApp.drawPaintArea();
 	return;
 }
