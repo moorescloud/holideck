@@ -66,8 +66,6 @@ function photograb() {
 		}, 500);
 	}
 	
-	//$(window).resize(setCanvasSize);
-	//$(window).resize(setPainterSize);
 	$(window).resize(function() {
 		setCanvasSize();
 		setPainterSize();
@@ -236,12 +234,10 @@ function photograb() {
 
 		// Get Painter Dimensions
 		var w = theApp.thePainter.width;
-		//var h = theApp.thePainter.height;
-		//console.log("W: " + w + ", H: " + h);
+		var h = theApp.thePainter.height;
 
 		// Width / 50 Globes
 		var i = w / 50.0;
-		//var theGlobe = Math.floor(theApp.mouseX / i)
 		var theGlobe = Math.floor(x / i)
 
 		// Set Globe Colour
