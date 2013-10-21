@@ -78,16 +78,43 @@ function photograb() {
 	function setCanvasSize() {
 
 		console.log("photograb.setCanvasSize");
+		
 		var w = $('.canvas-container').width();
 		var h = $('.canvas-container').height();
+		
 		var wRetina = w * theApp.devicePixelRatio;
 		var hRetina = h * theApp.devicePixelRatio;
-
-		console.log("setting canvas size to: ", wRetina, " x ", hRetina);
-		$('#canvas').attr('width', wRetina);
-		$('#canvas').attr('height', hRetina);
-
-		// Resized so redraw
+		
+		// Bad: Canvas Exceeds Viewport
+		//$('#canvas').attr('width', wRetina);
+		//$('#canvas').attr('height', hRetina);
+		
+		// Bad: Canvas’ Image Not Full Size
+		$('#canvas').attr('width', w);
+		$('#canvas').attr('height', h);
+		
+		// PROBLEM
+		// Note, initially the canvas is 100% wide but just 290px high, which inputs to this problem
+		// Function handleFiles() image is set using maxWidth and maxHeight
+		// But this misbehaves depending on a portrait or landscape image, i.e.
+		// Whichever is the smallest, constrains the image size
+		// This rendering constraint is recursive, subsequent images get smaller and smaller :)
+		// Load a portrait followed by a landscape, rinse & repeat, to see this recursion in action
+		
+		// PROPOSAL
+		// Something like…
+		// Find the aspect ratio, or the larger of the image width or height
+		// Then render the image constrained by that dimension, and not the other
+		// Question is, how, considering megapix-image.js
+		
+		// SOLUTION ONE (Mediocre)
+		// Set maxHeight manually to 1024px 
+		// Note, this is based on iPad height in line with the 768px responsive max width
+		// This (poorly) assumes portrait orientation, but allows a max size load for most images
+		// Note, the below function works okay, because canvas has already been resized
+		// Note, it’s the handleFiles() function that has this dimension update
+		
+		// Resized So Redraw
 		if (theApp.mpImg != null) {
 			var resCanvas1 = document.getElementById('canvas');
 			theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
@@ -96,7 +123,8 @@ function photograb() {
 	
 	function setPainterSize() {
 		console.log("photograb.setPaintAreaSize");
-		var w = $('.paintarea-container').width();
+		//var w = $('.paintarea-container').width();
+		var w = $('.paintarea-container').width() / 2;
 		//var h = $('.paintarea-container').height();
 		var h = 50;
 		$('#paintarea').attr('width', w);
@@ -113,7 +141,6 @@ function photograb() {
 		// Get Painter Dimensions
 		var w = theApp.thePainter.width;
 		var h = theApp.thePainter.height;
-		//console.log("W: " + w + ", H: " + h);
 		
 		// Width / 50 Globes
 		var i = w / 50.0;
@@ -158,9 +185,11 @@ function photograb() {
 		// Outline Painter With Colour
 		theApp.painterContext.beginPath();
 		theApp.painterContext.rect(0, 0, w, h);
-		theApp.painterContext.lineWidth = 4;
+		theApp.painterContext.lineWidth = 1;
 		theApp.painterContext.strokeStyle = clh;
 		theApp.painterContext.stroke();
+		
+		$("#pick").css('background-color', clh);
 
 	}
 
@@ -178,7 +207,7 @@ function photograb() {
 		theApp.b = rgb[2];
 		
 		// UI Output
-		var colour = rgbToHex(theApp.r, theApp.g, theApp.b);
+		var colour = "#" + rgbToHex(theApp.r, theApp.g, theApp.b);
 		$(".canvas").html("Canvas: " + x + " / " + y + " (#" + colour + ")");
 		
 		// Refresh
@@ -295,7 +324,7 @@ function photograb() {
 	}
 
 	function onSampMouseMove(e) {
-		console.log('photograb.onSampMouseMove');
+		//console.log('photograb.onSampMouseMove');
 	}
 	
 /*	function onSampMouseClick(e) {
@@ -463,7 +492,8 @@ function handlefiles(tf){
 	var file = tf[0];
 	theApp.mpImg = new MegaPixImage(file);
 	var resCanvas1 = document.getElementById('canvas');
-	theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
+	//theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: theApp.theCanvas.height });
+	theApp.mpImg.render(resCanvas1, { maxWidth: theApp.theCanvas.width, maxHeight: 1024 });
 	theApp.drawPaintArea();
 	return;
 }
