@@ -8,21 +8,45 @@
 
 #photograb .canvas-container {
 	margin-bottom: 10px;
-	line-height: 0;
 	width: 100%;
+	height: 70%;
 }
 
 #photograb #canvas {
-	border: 1px solid #fff;
-	background: #000;
+/* 	border: 1px solid #fff; */
+	background: #ccc;
 }
 
-#photograb .paintarea-containter {
+#photograb .paintarea-container {
+	background: url(photograb-measurerer.png) no-repeat left bottom;
+	background-size: 50% auto;
+	padding-top: 17px;
 	line-height: 0;
 	width: 100%;
 }
 
 #photograb #paintarea {
 	border: 1px solid #fff;
-	background: #000;
+	background: #ccc;
+	float: left;
+}
+
+#photograb #pick {
+	margin-left: 10px;
+	width: 50px;
+	height: 50px;
+	background: red;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+  float: left;
+}
+
+#photograb .debug {
+	padding-top: 10px;
+	clear: both;
+}
+
+#photograb .debug p {
+	color: #111;
 }
