@@ -32,17 +32,19 @@ function afl() {
 		"demons": 18
 	};
 
+
 	function old_pickClub(team_name) {
 		team =  team_name.substring(1);
 		console.log("team_name " + team);
-		console.log(team_list[team])
+		console.log(team_list[team]);
 		currentLight.afl(team_list[team]);
 	}
 
 	function pickClub(team_name) {
 		var team = team_name.substring(1);
-		console.log("team_name " + team);
+		console.log("team_name:" + team + ":");
 		var entry = team_list[team] -1;
+		console.log('entry: ' + entry);
 
 		// Copy the array of light values to the string
 		for (var j=0; j < 50; j++) {
@@ -463,54 +465,6 @@ function afl() {
 		DOCKERS_PURPLE
 	];
 
-	var EAGLES_BLUE = [ 0x00, 0x00, 0x3F ];
-	var EAGLES_WHITE = [ 0xff, 0xff, 0xff ];
-	var EAGLES_GOLD = [ 0xff, 0xa4, 0x03 ];
-
-	var eagles = [
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE,
-		EAGLES_WHITE,
-		EAGLES_GOLD,
-		EAGLES_GOLD,
-		EAGLES_BLUE,
-		EAGLES_BLUE
-	];
 
 	var GIANTS_ORANGE = [ 0xff, 0xa5, 0x00 ];
 	var GIANTS_CHARCOAL = [ 0x02, 0x02, 0x02 ];
@@ -1075,6 +1029,59 @@ function afl() {
 		TIGERS_YELLOW
 	];
 
+	var eagles = [
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ],
+		[ 0x00, 0x00, 0x3F ],
+		WHITE,
+		[ 0xff, 0xa4, 0x03 ],
+		[ 0x00, 0x00, 0x3F ]
+	];
+
 	var team_lights = [
 		swans,
 		blues,
@@ -1087,7 +1094,7 @@ function afl() {
 		kangaroos,
 		saints,
 		lions,
-		eagles,
+		eagles, 
 		suns,
 		bulldogs,
 		tigers, 
@@ -1095,5 +1102,5 @@ function afl() {
 		power,
 		demons
 	];
-	
+
 }
